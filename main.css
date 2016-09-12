@@ -3,11 +3,14 @@ body {
 }
 #searchbar {
     display: inline-block;
+    justify-content: center;
+    justify-content: center;
 }
 #searchbox {
-    padding:8px 15px;
-    border:0px solid #dbdbdb;
+    padding:3px 10px;
     color: transparent;
+    display:table-cell;
+    width:100vw;
 }
 #searchbutton {
     border:2px solid #207cca;
@@ -25,7 +28,18 @@ form {
     bottom: 50%;
     width: auto;
     height: auto;
-    
+}
+#left {
+    width: 70%;
+    float:left;
+    text-align: left;
+    background-color: aliceblue;
+}
+#right {
+    width:29%;
+    float: right;
+    text-align: left;
+    background-color: blueviolet;
 }
 #image {
     padding: 30px;
@@ -43,10 +57,8 @@ form {
     width: 100px; 
 }
 #actionbar {
-    background-image: url(https://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg);
     color: white;
     font-size: 25px;
-    
 }
 th, td {
     border: 1px solid #12C0CF;
