@@ -23,6 +23,36 @@ form {
     width: auto;
     height: auto;
 }
+#actionbar {
+    background-image: url(https://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg);
+    color: white;
+    font-size: 25px;
+    
+}
+th, td {
+    border: 1px solid #12C0CF;
+}
+th {
+    background-color: #2EE42E;
+    color: black;
+}
+td:hover {
+    background-color: cornsilk;
+    text-align: center;
+    font-weight: bold;
+}
+a:visited {
+    color:aliceblue;
+}
+a:link {
+    color: white;
+}
+
+/* mouse over link */
+a:hover {
+    color: deeppink;
+}
+
 ::-webkit-input-placeholder { /* Chrome */
     color: #207cca;
     transition: opacity 250ms ease-in-out;
