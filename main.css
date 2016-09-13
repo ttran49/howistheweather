@@ -25,7 +25,7 @@ form {
 }
 #actionbar {
     background-image: url(https://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg);
-    color: white;
+    color: lightgrey;/*white*/
     font-size: 25px;
     
 }
@@ -45,12 +45,12 @@ a:visited {
     color:aliceblue;
 }
 a:link {
-    color: white;
+    color: black;/*was once white*/
 }
 
 /* mouse over link */
 a:hover {
-    color: deeppink;
+    color: white;/*was once deeppink*/
 }
 
 ::-webkit-input-placeholder { /* Chrome */
