@@ -6,16 +6,19 @@ body {
     border:0px solid #dbdbdb;
     color: transparent;
 }
+/*What color is the Search button*/
 #searchbutton {
     border:2px solid #207cca;
     background-color:#207cca;
     color:#fafafa;
 }
+/*What color is the Search button when you hover over it*/
 #searchbutton:hover  {
     background-color:#fafafa;
     color:#207cca;
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
+
 form {
     position: fixed;
     top: 50%;
@@ -25,7 +28,7 @@ form {
 }
 #actionbar {
     background-image: url(https://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg);
-    color: lightgrey;/*white*/
+    color: lightgrey;/*was once white*/
     font-size: 25px;
     
 }
@@ -44,13 +47,13 @@ td:hover {
 a:visited {
     color:aliceblue;
 }
+/*What color is the link normally*/
 a:link {
-    color: black;/*was once white*/
+    color: white;
 }
-
 /* mouse over link */
 a:hover {
-    color: white;/*was once deeppink*/
+    color: aliceblue;/*was once deeppink*/
 }
 
 ::-webkit-input-placeholder { /* Chrome */
