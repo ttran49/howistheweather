@@ -53,7 +53,7 @@ a:link {
 }
 /* mouse over link */
 a:hover {
-    color: aliceblue;/*was once deeppink*/
+    color: deeppink;/*was once deeppink*/
 }
 
 ::-webkit-input-placeholder { /* Chrome */
