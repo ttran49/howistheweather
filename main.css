@@ -1,36 +1,64 @@
 body {
     background-color: lightgray;
 }
-#searchbox {
-    padding:8px 15px;
-    border:0px solid #dbdbdb;
-    color: transparent;
+#searchbar {
+    display: inline-block;
+    justify-content: center;
+    justify-content: center;
 }
-/*What color is the Search button*/
+#searchbox {
+    padding:3px 10px;
+    color: transparent;
+    display:table-cell;
+    width:100vw;
+}
 #searchbutton {
     border:2px solid #207cca;
     background-color:#207cca;
     color:#fafafa;
 }
-/*What color is the Search button when you hover over it*/
 #searchbutton:hover  {
     background-color:#fafafa;
     color:#207cca;
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
-
 form {
-    position: fixed;
+    position: relative;
     top: 50%;
     bottom: 50%;
     width: auto;
     height: auto;
 }
-#actionbar {
-    background-image: url(https://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg);
-    color: lightgrey;/*was once white*/
-    font-size: 25px;
+#left {
+    width: 70%;
+    float:left;
+    text-align: left;
+    background-color: aliceblue;
+}
+#right {
+    width:29%;
+    float: right;
+    text-align: left;
+    background-color: blueviolet;
+}
+#image {
+    padding: 30px;
+    max-width: 70%;
     
+}
+#photoleft {
+    float: left;
+    margin: 0 auto;
+    width: 100px; 
+}
+#photoright {
+    float: right;
+    margin: 0 auto;
+    width: 100px; 
+}
+#actionbar {
+    color: white;
+    font-size: 25px;
 }
 th, td {
     border: 1px solid #12C0CF;
@@ -44,16 +72,21 @@ td:hover {
     text-align: center;
     font-weight: bold;
 }
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
 a:visited {
     color:aliceblue;
 }
-/*What color is the link normally*/
 a:link {
     color: white;
 }
+
 /* mouse over link */
 a:hover {
-    color: deeppink;/*was once deeppink*/
+    color: deeppink;
 }
 
 ::-webkit-input-placeholder { /* Chrome */

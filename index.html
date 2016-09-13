@@ -9,18 +9,53 @@
         <link rel="stylesheet" href="main.css">
     </head>
     <body>
-        <span>
-            <img src="http://www.noaa.gov/sites/default/files/styles/crop_394x394/public/thumbnails/image/FocusArea__Weather-02.jpg?itok=fO6wu2A8" alt="weather image" width=15% height= 15%>
-        </span>
-        <span>
-            <form>
-                <input type="text" placeholder="Search for location ..." required id="searchbox">
-                <input type="button" value="Search" id="searchbutton">
-            </form>
-        </span>
+    <! the static bar at the top>
+    <div id="actionbar" style="overflow:auto; background-color: gray">
+        <div style="float:left;width:60%;overflow:hidden;height:64px">
+            <img src="http://www.saletur.ru/wimg/wsymbol_0010_heavy_rain_showers.png" alt="icon">
+            <div style="float:right;width:30%;overflow:hidden;height:44px">How's the weather?</div>
+            </div>
+        </div>
+        <div>
         <p>
-        <a href="https://www.google.com/search?num=50&site=&source=hp&q=weather&oq=weather&gs_l=hp.3..0i67k1j0i20k1j0i67k1l2j0i20k1j0i131k1j0j0i67k1l2j5.273.1078.0.1239.8.8.0.0.0.0.136.679.6j2.8.0....0...1c.1.64.hp..0.7.602.0..35i39k1.WOGUUGxk1R4"> Link to Google Weather </a>
+        <a href="https://www.google.com/search?num=50&site=&source=hp&q=weather&oq=weather&gs_l=hp.3..0i67k1j0i20k1j0i67k1l2j0i20k1j0i131k1j0j0i67k1l2j5.273.1078.0.1239.8.8.0.0.0.0.136.679.6j2.8.0....0...1c.1.64.hp..0.7.602.0..35i39k1.WOGUUGxk1R4"> link to weather thing </a>
         </p>
-        <footer> Created by Chuck and Nick </footer>
+        <a href="resultpage.html"> next page </a>
+        </div>
+        <!- content, where the weather thing would be>
+    <div id="searchbox">
+        <div>
+            <form>
+                <button id="searchbutton"style= "float:right"> Search!</button>
+                <span style="display:block;overflow: hidden;">
+                    <input style="width:100%" type="text" placeholder="Search for location ..." required id="searchbox">
+                </span>
+            </form>
+        </div>
+    </div>
+    <div id="content">
+        <div id="left">
+            <div style="float: left; width=49%">
+                SUBTEXT LEFT
+                <p>
+                    news in here or weather report
+                </p>
+            </div>
+            <div style="float: right; width=49%">
+                SUBTEXT RIGHT
+                api stuff
+                https://developer.yahoo.com/weather/
+                
+                testing
+            </div>
+        </div>
+        <div id="right">
+            text right
+            <p>
+                idk what will go in here but this will be here just in case
+            </p>
+        </div>  
+    </div>
+        <footer> Created by Chuck </footer>
     </body>
 </html>
