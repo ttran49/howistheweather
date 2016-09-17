@@ -22,6 +22,91 @@
             target1.style.display='none';
             target2.style.display='none';
         }
+        function draw(){
+            var string1=[["░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░<br>",
+                        "░░░░░░░░░░▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄░░░░░░░░░<br>",
+                        "░░░░░░░░▄▀░░░░░░░░░░░░▄░░░░░░░▀▄░░░░░░░<br>",
+                        "░░░░░░░░█░░▄░░░░▄░░░░░░░░░░░░░░█░░░░░░░<br>",
+                        "░░░░░░░░█░░░░░░░░░░░░▄█▄▄░░▄░░░█░▄▄▄░░░<br>",                   
+                        "░▄▄▄▄▄░░█░░░░░░▀░░░░▀█░░▀▄░░░░░█▀▀░██░░<br>",                   
+                        "░██▄▀██▄█░░░▄░░░░░░░██░░░░▀▀▀▀▀░░░░██░░<br>",                   
+                        "░░▀██▄▀██░░░░░░░░▀░██▀░░░░░░░░░░░░░▀██░<br>",
+                        "░░░░▀████░▀░░░░▄░░░██░░░▄█░░░░▄░▄█░░██░<br>",
+                        "░░░░░░░▀█░░░░▄░░░░░██░░░░▄░░░▄░░▄░░░██░<br>",
+                        "░░░░░░░▄█▄░░░░░░░░░░░▀▄░░▀▀▀▀▀▀▀▀░░▄▀░░<br>",
+                        "░░░░░░█▀▀█████████▀▀▀▀████████████▀░░░░<br>",
+                        "░░░░░░████▀░░███▀░░░░░░▀███░░▀██▀░░░░░░<br>",
+                        "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░<br>"],
+                       ["'.,¸,.·*¯`·.,¸,.·.... ╭━━━━╮<br>",
+                        "`·.,¸,.·*¯`·.,¸,.·*¯. |:::::: /\\:___:/\\<br>",
+                        "`·.,¸,.·*¯`·.,¸,.·* <|::::: (｡◕‿‿ ◕)<br>",
+                        "`·.,¸,.·*¯`·.,¸,.·* ╰O--O----O-O<br>"],
+                       [".......................................................................................... .........<br>",
+                        ".................................mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm............. .........<br>",
+                        ".........................mmmmmmmmmmmmmmmm..................................mmmmm.......... .........<br>",
+                        "...................mmmmmmmmmmm..........mmmmm...............mm................mmm......... .........<br>",
+                        ".................mmmm............................................mm.............mmm....... .........<br>",
+                        "..............mmmm....m..mmmmmm............mmm..............mm......m............mmm...... .........<br>",
+                        "............mmmm.................................................mm....m..........mmm..... .........<br>",
+                        "...........mmm............mmmmm....................m..........mmm...m....m.........mmm.... .........<br>",
+                        "..........mm...........m.........................m................mm...m....m.......mmm... .........<br>",
+                        "..........mm.........m............m..................................m..m....m.......mm... .........<br>",
+                        "..........mm........m..................................................m..m...........mm.. .........<br>",
+                        ".........mm..........................................mmmmmmmmmmmmmm...................mmm. .........<br>",
+                        "........mmm............mmmmmmmm...................mmmmm...mmmmmmmmmmmm.................mmm .........<br>",
+                        "....mmmm...........mmmmmmmmmmmmmm.............mmmm......mmmmmmmm..mmm..................mmm .......<br>",
+                        "...mmm...mmmmm.mmm.mmmmmmmmmmmmmmm...........mmm.....mmmmmmmmmmmmmmmmm....m....mmmmmmmm.mm mm.....<br>",
+                        "..mm...m..................mmmmmmmmmmmmm.......mmmmmmmmm...........mm...m.................. mmm....<br>",
+                        ".mm..m...mm.....................mmmm...........mmmmm......mmm..............mmmmmmmmmm..... ..mm...<br>",
+                        ".mm.m..m...mmmmmm................mm.........................mmmm.......mmmmmm......mmmm... .m.mm..<br>",
+                        ".mmm.....mmmmmmmmmm....m.........mm...........................mmmmmmmmmmm.....mm.....mmm.. .m..mmm<br>",
+                        ".mmm.....m.......mmmmmmmm........mm...........................................mm......mm.. .m..mmm<br>",
+                        ".mmm..m.......mm..mmmm........mmmm.........................................mmmmm.......mm. .m...mm<br>",
+                        ".mm....m......mm...........mmmm................mmmmmmmm................mmmmm...mmmmmm..mm. .m...mm<br>",
+                        ".mmmm...mm..mmmm..........mmmmm....................mm..............mmmmmm.....mmm.mmm.mmm. .m..mmm<br>",
+                        "..mm.mm.....mmmm.......mm..mmmmm.........mmmmmmm...mm..........mmmmmmm........mm......mm.. ....mmm<br>",
+                        "..mmm....m..mm.mmm...m........mmm..............m.mmm......mmmmmmmm.mm.......mmmm.....mm... m..mmm.<br>",
+                        "...mmm.....mmmmmmmmm............mmmmmm...............mmmmmmmm......mm....mmmmmm.........mm ..mm...<br>",
+                        "....mmm....mm.mm.mmmmmm...........mmm...........mmmmmmmm..........mmm.mmmmmmmm.......m.... .mmm...<br>",
+                        ".....mm....mmmm..mm..mmmmmmmm........mmmmmmmmmmmmmm..mm..........mmmmmmm..mmm..........mmm mm.....<br>",
+                        ".....mm....mmmm..mm....mmmmmmmmmmmmmmmmmmmm..........mm......mmmmmmmm....mmm............mm m......<br>",
+                        ".....mm....mmmm..mm...mmm.......mm.......mm..........mmm.mmmmmmmmm.mm...mmm...........mmm. .......<br>",
+                        ".....mm....mmmmmmmm...mm........mm.......mm.........mmmmmmmmmmm....mm..mmm...........mmm.. .......<br>",
+                        ".....mm....mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm.......mmmmmm............mm... .......<br>",
+                        ".....mm....mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm.mm...........mmm.............mmm... .......<br>",
+                        ".....mm.....mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm.......mm.........mmm..............mmm.... .......<br>",
+                        ".....mm.....mm.mmmmmmmmmmmmmmmmmmmmmmmmmmm.mm..........mmm.....mmmm...............mmm..... .......<br>",
+                        ".....mm......mm.mm..mm...mm.....mmm........mm...........mm...mmmm...............mmm....... .......<br>",
+                        ".....mm......mmmmmm.mmm...mm.....mm........mm............mmmmmm................mmm........ .......<br>",
+                        ".....mm.......mmmm...mmm..mmm....mm........mm.........mmmmmm.......m.....m...mmm.......... .......<br>",
+                        ".....mm.........mmmmmmmmm..mm....mmm.......mm..mmmmmmmmm........m.....mm...mmmm........... .......<br>",
+                        ".....mm..............mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm.........mm....mm....mmmm ...............<br>",
+                        "....mmm........m..........................................m.....mm....mmmmm.. ..............<br>",
+                        "....mm..........m....................................mm......m.....mmmmm..... ..............<br>",
+                        "....mm............m..............................mm......mm.....mmmmm........ ..............<br>",
+                        "..mm.....mm........mmm...........mmmmmmmmmm......mm.......mmmmmm....... ............<br>",
+                        ".mm.........m.........................mmm............mmmmm...... ........<br>",
+                        ".mmm..........mmmmmmmmmmmmmmm.....................mmmmm...... ....<br>",
+                        ".mmm..........................................mmmmm...... ..<br>",
+                        "..mmm...................................mm.mmmmm.......<br>",
+                        "...mmmm............................mmmmmmmmmm........<br>",
+                        "....mmmmm...................mmmmmmmmm..............<br>" ,
+                        ".......mmmmmmmmmmmmmmmmmmmmmmmm....................<br>"]];
+            //create a element
+            var element=document.getElementById("drawspace");
+            var face= Math.round(Math.random()*2);
+            console.log(face);
+            for (i =0; i< string1[face].length;i++){
+                //drawing
+                (function(data){
+                    window.setTimeout(function(){
+                        element.innerHTML+=data;   
+                    },1000);
+                }(string1[face][i]));
+            }
+        }
+        var drawbutton= document.getElementById("drawbutton");
+        drawbutton.addEventListener("click", draw());
     </script>
 </head>
 <body>
@@ -83,6 +168,12 @@
     <div id="dogvideo">
         <p>Also here is a <b>dog</b> video and you can't fast forward :)</p>
         <iframe width="900" height="506" src="https://www.youtube-nocookie.com/embed/GF60Iuh643I?controls=0" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <div id="choices">
+        <button id="drawbutton">Draw something</button>
+        <div id="drawspace">
+           
+        </div>
     </div>
     <p><a href="index.html">Back</a></p>
 </body>
