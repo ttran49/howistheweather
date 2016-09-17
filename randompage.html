@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <title>Harambe</title>
     <meta name="description" content="Harambe">
     <link rel="stylesheet" href="extra.css">
@@ -57,5 +57,30 @@
         <a id="myjob"></a>
         <p> I protected a child and became a <b><s><a href="http://knowyourmeme.com/memes/harambe-the-gorilla">meme</a></s></b></p>
     </div>
+    <div id="slideshow">
+        <img src="http://i.dailymail.co.uk/i/pix/2016/05/30/07/34BEE4DA00000578-3615783-Zoo_director_Thane_Maynard_supported_the_response_team_s_decisio-a-20_1464591378551.jpg" alt="Harambe#1" class="active"/>
+        <img src="http://www.telegraph.co.uk/content/dam/news/2016/05/29/99356270_Harambe_a_17-year-old_gorilla-NEWS-large_trans++qVzuuqpFlyLIwiB6NTmJwfSVWeZ_vEN7c6bHu2jJnT8.jpg" alt="harambe#2" />
+    </div>
+    <script>
+        function slideSwitch() {
+            var $active = $('#slideshow IMG.active');
+
+            if ( $active.length == 0 ) $active = $('#slideshow IMG:last');
+
+            var $next =  $active.next().length ? $active.next()
+                : $('#slideshow IMG:first');
+
+            $active.addClass('last-active');
+
+            $next.css({opacity: 0.0})
+                .addClass('active')
+                .animate({opacity: 1.0}, 1000, function() {
+                $active.removeClass('active last-active');
+                });
+        }
+        $(function() {
+            setInterval( "slideSwitch()", 5000 );
+        });
+    </script>
 </body>
 </html>

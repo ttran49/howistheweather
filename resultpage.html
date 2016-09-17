@@ -3,10 +3,26 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    
     <title>Weather Results</title>
     <meta name="description" content="A weather app for SWE432.">
     <link rel="stylesheet" href="main.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript">
+        function hide_and_show(hideid,showid){
+            var targethide = document.getElementById(hideid);
+            var targetshow= document.getElementById(showid);
+            
+                targethide.style.display='none';
+                targetshow.style.display='block';
+        }
+        function hide_all (firstid,secondid){
+            var target1= document.getElementById(firstid);
+            var target2= document.getElementById(secondid);
+            
+            target1.style.display='none';
+            target2.style.display='none';
+        }
+    </script>
 </head>
 <body>
     <! the static bar at the top>
@@ -47,9 +63,27 @@
         </table>
     </div>
     <p>I have ran out of ideas to create a page about therefore the next <a href="randompage.html" style="color:blue;">page</a> won't be related to the project. -Chuck</p>
-    <p>Also here is a cat video and you can't fast forward :)</p>
-    <iframe width="900" height="506" src="https://www.youtube-nocookie.com/embed/G8KpPw303PY?controls=0" frameborder="0" allowfullscreen></iframe>
+    <div id="choices">
+        <span>
+            <button onclick="hide_and_show('catvideo','dogvideo');">DOG video</button>
+             or
+        </span>
+        <span>
+            <button onclick="hide_and_show('dogvideo','catvideo');">CAT video</button>
+        </span>
+        <span>
+            <button onclick="hide_all('catvideo','dogvideo');"> Reset!</button>
+        </span>
+    </div>
     
-<p><a href="index.html">Back</a></p>
+    <div id="catvideo">
+    <p>Also here is a <b>cat</b> video and you can't fast forward :)</p>
+    <iframe width="900" height="506" src="https://www.youtube-nocookie.com/embed/G8KpPw303PY?controls=0" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <div id="dogvideo">
+        <p>Also here is a <b>dog</b> video and you can't fast forward :)</p>
+        <iframe width="900" height="506" src="https://www.youtube-nocookie.com/embed/GF60Iuh643I?controls=0" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <p><a href="index.html">Back</a></p>
 </body>
 </html>
