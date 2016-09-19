@@ -105,8 +105,10 @@
                 }(string1[face][i]));
             }
         }
-        var drawbutton= document.getElementById("drawbutton");
-        drawbutton.addEventListener("click", draw());
+        $( window ).load(function() {
+            var drawbutton= document.getElementById("drawbutton");
+            drawbutton.addEventListener("click", draw());
+        });
     </script>
 </head>
 <body>
