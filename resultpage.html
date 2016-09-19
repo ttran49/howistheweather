@@ -95,7 +95,7 @@
             //create a element
             var element=document.getElementById("drawspace");
             var face= Math.round(Math.random()*2);
-            console.log(face);
+            //console.log(face);
             for (i =0; i< string1[face].length;i++){
                 //drawing
                 (function(data){
@@ -105,9 +105,16 @@
                 }(string1[face][i]));
             }
         }
+        function erase(){
+            //need to erase the content of the div not the div itself.
+            //empty? html('') both not working
+        }
         $( window ).load(function() {
             var drawbutton= document.getElementById("drawbutton");
             drawbutton.addEventListener("click", draw());
+            
+            var erasebutton= document.getElementById("erase");
+            erasebutton.addEventListener("click", erase());
         });
     </script>
 </head>
@@ -172,7 +179,12 @@
         <iframe width="900" height="506" src="https://www.youtube-nocookie.com/embed/GF60Iuh643I?controls=0" frameborder="0" allowfullscreen></iframe>
     </div>
     <div id="choices">
-        <button id="drawbutton">Draw something</button>
+        <span>
+            <button id="drawbutton">Draw something</button>
+        </span>
+        <span>
+            <button id="erase">Erase</button>
+        </span>
         <div id="drawspace">
            
         </div>
