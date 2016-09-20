@@ -1,6 +1,16 @@
 body {
     background-color: lightgray;
 }
+
+#catvideo{
+    display: none;
+}
+#dogvideo{
+    display: none;
+}
+#choices {
+    text-align: center;
+}
 /*it doesn't look like we used searchbar at all in index.html. Why does this exist?*/
 #searchbar {
     display: inline-block;
