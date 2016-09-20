@@ -14,6 +14,8 @@
             
                 targethide.style.display='none';
                 targetshow.style.display='block';
+                var stateObj = { foo: "bar" };
+                history.pushState(stateObj, "page 2", showid);
         }
         function hide_all (firstid,secondid){
             var target1= document.getElementById(firstid);
@@ -95,27 +97,26 @@
             //create a element
             var element=document.getElementById("drawspace");
             var face= Math.round(Math.random()*2);
-            //console.log(face);
+            console.log(face);
             for (i =0; i< string1[face].length;i++){
                 //drawing
                 (function(data){
                     window.setTimeout(function(){
                         element.innerHTML+=data;   
-                    },1000);
+                    },200*i);
                 }(string1[face][i]));
             }
         }
         function erase(){
-            //need to erase the content of the div not the div itself.
-            //empty? html('') both not working
-        }
-        $( window ).load(function() {
-            var drawbutton= document.getElementById("drawbutton");
-            drawbutton.addEventListener("click", draw());
+            $("#drawspace").empty();
             
-            var erasebutton= document.getElementById("erase");
-            erasebutton.addEventListener("click", erase());
-        });
+        }
+            $(window ).load(function() {
+            var drawbutton= document.getElementById("drawbutton");
+            drawbutton.addEventListener("click", draw);
+            var erasebutton= document.getElementById("erasebutton");
+            erasebutton.addEventListener("click", erase);
+            });
     </script>
 </head>
 <body>
@@ -179,12 +180,8 @@
         <iframe width="900" height="506" src="https://www.youtube-nocookie.com/embed/GF60Iuh643I?controls=0" frameborder="0" allowfullscreen></iframe>
     </div>
     <div id="choices">
-        <span>
-            <button id="drawbutton">Draw something</button>
-        </span>
-        <span>
-            <button id="erase">Erase</button>
-        </span>
+        <span><button id="drawbutton">Draw something</button></span>
+        <span><button id="erasebutton">Erase!</button></span>
         <div id="drawspace">
            
         </div>
