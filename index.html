@@ -34,8 +34,8 @@
         </div>
     </div>
     <div id="content">
-        <div id="left">
-            <div style="float: left; width=49%">
+        <div id="left"style="position:absolute;left:25%;right:76%;width:24%">
+            <!--div style="float: left; width=49%">
                 SUBTEXT LEFT
                 <p>
                     news in here or weather report
@@ -47,13 +47,49 @@
                 https://developer.yahoo.com/weather/
                 
                 testing
-            </div>
+            </div-->
+            <button id="newsbutton">News</button>
+            <script>
+            help = 0;
+            news = 0;
+            $("#newsbutton").click(function(){
+                if(news == 0){
+                    $("#news").show();
+                    $("#help").hide();
+                    news = 1;
+                    help = 0;
+                }
+                else{
+                    $("#news").hide();
+                    $("#help").hide();
+                    news = 0;
+                    help = 0;
+                }
+            });
+            </script>
         </div>
-        <div id="right">
-            text right
+        <div id="right"style="position: absolute;left:76%;right:25%;width:24%">
+            <button id="helpbutton">Help</button>
+            <script>
+            $("#helpbutton").click(funciton(){
+                if(help == 0){
+                    $("#help").show();
+                    $("#news").hide();
+                    help = 1;
+                    news = 0;
+                }
+                else{
+                    $("#help").hide();
+                    $("#news").hide();
+                    help = 0;
+                    news = 0;
+                }
+            });
+            </script>
+            <!--text right
             <p>
                 We're putting a help button here
-            </p>
+            </p-->
         </div>  
     </div>
         <footer> Created by Chuck </footer>
