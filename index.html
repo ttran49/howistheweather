@@ -25,7 +25,8 @@
         <!- content, where the weather thing would be>
     <div id="searchbox">
         <div>
-            <form style="position:absolute;left:25%;right:25%">/*This should now be properly centered vertically and horizontally*/
+            <!--This should now be properly centered vertically and horizontally-->
+            <form style="position:absolute;left:25%;right:25%">
                 <button id="searchbutton"style= "float:right"> Search!</button>
                 <span style="display:block;overflow: hidden;">
                     <input style="width:100%" type="text" placeholder="Search for location..." required id="searchbox">
@@ -34,7 +35,7 @@
         </div>
     </div>
     <div id="content">
-        <div id="left"style="position:absolute;left:25%;right:76%;width:24%">
+        <div id="left"style="position:absolute;top:55%;left:25%;right:76%;width:24%">
             <!--div style="float: left; width=49%">
                 SUBTEXT LEFT
                 <p>
@@ -68,10 +69,10 @@
             });
             </script>
         </div>
-        <div id="right"style="position: absolute;left:76%;right:25%;width:24%">
+        <div id="right"style="position: absolute;top:55%;right:25%;left:76%;width:24%">
             <button id="helpbutton">Help</button>
             <script>
-            $("#helpbutton").click(funciton(){
+            $("#helpbutton").click(function(){
                 if(help == 0){
                     $("#help").show();
                     $("#news").hide();
@@ -90,8 +91,14 @@
             <p>
                 We're putting a help button here
             </p-->
-        </div>  
+        </div>
     </div>
-        <footer> Created by Chuck </footer>
+    <div id="news"type="text"style="top:60%;left:25%;right:25%;display:none">
+        <p>Some kind of news will go here!</p>
+    </div>
+    <div id="help"type="text"style="top:60%;left:25%;right:25%;display:none">
+        <p>Some kind of help will go here!</p>
+    </div>
+        <footer> Created by Chuck and Nick</footer>
     </body>
 </html>
