@@ -1,6 +1,7 @@
 body {
     background-color: lightgray;
 }
+
 #catvideo{
     display: none;
 }
@@ -10,18 +11,19 @@ body {
 #choices {
     text-align: center;
 }
+/*it doesn't look like we used searchbar at all in index.html. Why does this exist?*/
 #searchbar {
     display: inline-block;
-    justify-content: center;
-    justify-content: center;
+    justify-content: center;/*why were there 2 of this line?*/
 }
 #searchbox {
     padding:3px 10px;
-    color: transparent;
+    color: black;/*was transparent*/
     display:table-cell;
     width:100vw;
 }
 #searchbutton {
+    height: 25px;/*Searchbox's padding makes it a bit bigger, this just makes them even*/
     border:2px solid #207cca;
     background-color:#207cca;
     color:#fafafa;
@@ -31,11 +33,20 @@ body {
     color:#207cca;
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
+#news {
+    position:absolute;
+    color:black;
+    background-color:white;
+}
+#help {
+    position:absolute;
+    color:black;
+    background-color:white;
+}
 form {
-    position: relative;
-    top: 50%;
-    bottom: 50%;
-    width: auto;
+    position: relative;/*we should change this to absolute. The search bar wont be centered if we leave it like this*/
+    top: 50%;/*the line that said 'bottom:50%' was completely redundant*/
+    width: 50%;/*Change this out of auto; we only need a search bar that goes halfway across*/
     height: auto;
 }
 #left {
@@ -87,7 +98,7 @@ footer {
     width: 100%;
 }
 a:visited {
-    color:aliceblue;
+    color:purple;/*aliceblue is way too similar to white*/
 }
 a:link {
     color: white;

@@ -25,17 +25,18 @@
         <!- content, where the weather thing would be>
     <div id="searchbox">
         <div>
-            <form>
+            <!--This should now be properly centered vertically and horizontally-->
+            <form style="position:absolute;left:25%;right:25%">
                 <button id="searchbutton"style= "float:right"> Search!</button>
                 <span style="display:block;overflow: hidden;">
-                    <input style="width:100%" type="text" placeholder="Search for location ..." required id="searchbox">
+                    <input style="width:100%" type="text" placeholder="Search for location..." required id="searchbox">
                 </span>
             </form>
         </div>
     </div>
     <div id="content">
-        <div id="left">
-            <div style="float: left; width=49%">
+        <div id="left"style="position:absolute;top:55%;left:25%;right:76%;width:24%">
+            <!--div style="float: left; width=49%">
                 SUBTEXT LEFT
                 <p>
                     news in here or weather report
@@ -47,15 +48,57 @@
                 https://developer.yahoo.com/weather/
                 
                 testing
-            </div>
+            </div-->
+            <button id="newsbutton">News</button>
+            <script>
+            help = 0;
+            news = 0;
+            $("#newsbutton").click(function(){
+                if(news == 0){
+                    $("#news").show();
+                    $("#help").hide();
+                    news = 1;
+                    help = 0;
+                }
+                else{
+                    $("#news").hide();
+                    $("#help").hide();
+                    news = 0;
+                    help = 0;
+                }
+            });
+            </script>
         </div>
-        <div id="right">
-            text right
+        <div id="right"style="position: absolute;top:55%;right:25%;left:76%;width:24%">
+            <button id="helpbutton">Help</button>
+            <script>
+            $("#helpbutton").click(function(){
+                if(help == 0){
+                    $("#help").show();
+                    $("#news").hide();
+                    help = 1;
+                    news = 0;
+                }
+                else{
+                    $("#help").hide();
+                    $("#news").hide();
+                    help = 0;
+                    news = 0;
+                }
+            });
+            </script>
+            <!--text right
             <p>
-                idk what will go in here but this will be here just in case
-            </p>
-        </div>  
+                We're putting a help button here
+            </p-->
+        </div>
     </div>
-        <footer> Created by Chuck </footer>
+    <div id="news"type="text"style="top:60%;left:25%;right:25%;display:none">
+        <p>Some kind of news will go here!</p>
+    </div>
+    <div id="help"type="text"style="top:60%;left:25%;right:25%;display:none">
+        <p>Some kind of help will go here!</p>
+    </div>
+        <footer> Created by Chuck and Nick</footer>
     </body>
 </html>
