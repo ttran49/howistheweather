@@ -37,11 +37,15 @@ body {
     position:absolute;
     color:black;
     background-color:white;
+    font-family: Arial, Helvetica, sans-serif;
+    padding:10px
 }
 #help {
     position:absolute;
     color:black;
     background-color:white;
+    font-family: Arial, Helvetica, sans-serif;
+    padding:10px
 }
 form {
     position: relative;/*we should change this to absolute. The search bar wont be centered if we leave it like this*/
@@ -50,16 +54,16 @@ form {
     height: auto;
 }
 #left {
-    width: 70%;
+    width: 49%;
     float:left;
     text-align: left;
-    background-color: aliceblue;
+    background-color: white;
 }
 #right {
-    width:29%;
+    width:49%;
     float: right;
     text-align: left;
-    background-color: blueviolet;
+    background-color: white;
 }
 #image {
     padding: 30px;
