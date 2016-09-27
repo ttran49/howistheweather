@@ -43,6 +43,7 @@
         <script>
             $("#searchbutton").click(function(){
                 var input_text = $("#searchbox").val();
+                $("#info").html(input_text);
                 console.log('this is the text:'+input_text);
                 //var api = 'http://api.openweathermap.org/data/2.5/weather?q='+city+'&appid=';
                 
