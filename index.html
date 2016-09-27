@@ -47,7 +47,7 @@
             $("#searchbutton").click(function(){
                 var city = $("#searchbox").val();
                 console.log('this is the text:'+city);
-                var api = 'http://api.openweathermap.org/data/2.5/weather?q='+city+'&appid=';
+                var api = 'http://api.openweathermap.org/data/2.5/weather?q='+city+'&appid=AIzaSyBdjt0qVS4Kqe99efVN3CJZOoa9pXGUlNE';
                 document.getElementById("winfo").innerHTML = city.weather[0].description;
                 document.getElementById("tinfo").innerHTML = city.main.temp;
                 /*$.getJSON(api, function(city){
