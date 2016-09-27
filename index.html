@@ -26,11 +26,11 @@
     </div>
     <!- content, where the weather thing would be>
     <div style="position:absolute;top:20%;left:30%;right:30%;bottom:55%">
-        <p id="data"></p>
+        <p id="info"></p>
         <script>
             $("searchbutton").click(function(){
                 var input_text = document.getElementById("searchbox").value;
-                $("#data").html(input_text);
+                $("#info").html(input_text);
                 //var api = 'http://api.openweathermap.org/data/2.5/weather?q='+city+'&appid=';
                 
                 //$.getJSON(api, function(data){
