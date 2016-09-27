@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Weather Results</title>
+    <meta name="description" content="A weather app for SWE432.">
+    <link rel="stylesheet" href="main.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/3.4.0/firebase.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+    <script>
+        "use strict";
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBdjt0qVS4Kqe99efVN3CJZOoa9pXGUlNE",
+            authDomain: "swe432-firebase-stuff.firebaseapp.com",
+            databaseURL: "https://swe432-firebase-stuff.firebaseio.com",
+            storageBucket: "swe432-firebase-stuff.appspot.com",
+            messagingSenderId: "1069239150549"
+        };
+        firebase.initializeApp(config);
+        
+        var dataref= firebase.database().ref("Auth");
+        function register(username, email, pwd){
+            dataref.child(username).set({email: email, password: pwd});
+        }
+        function login (username, pwd){
+            return firebase.database().ref('/Auth/' + username).once('value').then(function(snapshot) {
+              if(snapshot.val().password.localeCompare(pwd)==0){
+                //successfully log in. do something
+                alert("Successful login as " + username);
+                
+              } else {
+                  alert("Wrong password!");
+              }
+            }).catch(function(){
+                alert("Wrong username or have not registered");
+            });
+        }
+        $(window).load(function(){
+            $("#registerBut").click(function(){
+                register($("#registerUsr").val(),$("#registerEmail").val(), $("#registerPwd").val());
+            });
+            $("#loginBut").click(function(){
+                login ($("#loginUsr").val(), $("#loginPwd").val());
+            });
+        });
+        
+    </script>
+</head>
+<body>
+    <! the static bar at the top>
+    <div id="actionbar" style="overflow:auto; background-image: url(https://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg);">
+        <div style="float:left;width:60%;overflow:hidden;height:44px">
+            <b><a href="index.html" title="Back">&#x21da GO BACK</a></b>
+            <div style="float:right;width:30%;overflow:hidden;height:44px">How's the weather?</div>
+            </div>
+        <div style="float:right;width:20%;overflow:hidden;height:44px;">
+            <input type="text" placeholder="Search for location ..." required id="searchbox">
+            <input type="button" value="Search" id="searchbutton">
+        </div>
+    </div>
+    
+    <! table for hw1 requirement>
+    <div id="table">
+        <table style="width:80%;">
+            <tr>
+                <th>Tasks to be done</th>
+                <th>Chuck</th>
+                <th>Nick</th>
+            </tr>
+            <tr>
+                <td>Adding contents to homepage</td>
+                <td>&#x2705</td>
+                <td>&#x2705</td>
+            </tr>
+            <tr>
+                <td>Adding stuff to result page</td>
+                <td>&#x2705</td>
+                <td>&#x2705</td>
+            </tr>
+            <tr>
+                <td>Animate?</td>
+                <td>&#x2705</td>
+                <td>&#x2705</td>
+            </tr>
+        </table>
+    </div>
+    <p>I have ran out of ideas to create a page about therefore the next <a href="randompage.html" style="color:blue;">page</a> won't be related to the project. -Chuck</p>
+    <div id="choices">
+        <span>
+            <button onclick="hide_and_show('catvideo','dogvideo');">DOG video</button>
+             or
+        </span>
+        <span>
+            <button onclick="hide_and_show('dogvideo','catvideo');">CAT video</button>
+        </span>
+        <span>
+            <button onclick="hide_all('catvideo','dogvideo');"> Reset!</button>
+        </span>
+    </div>
+    
+    <div id="catvideo">
+    <p>Also here is a <b>cat</b> video and you can't fast forward :)</p>
+    <iframe width="900" height="506" src="https://www.youtube-nocookie.com/embed/G8KpPw303PY?controls=0" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <div id="dogvideo">
+        <p>Also here is a <b>dog</b> video and you can't fast forward :)</p>
+        <iframe width="900" height="506" src="https://www.youtube-nocookie.com/embed/GF60Iuh643I?controls=0" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <div id="choices">
+        <span><button id="drawbutton">Draw something</button></span>
+        <span><button id="erasebutton">Erase!</button></span>
+        <div id="drawspace">
+           
+        </div>
+    </div>
+    <div>
+        <span><button id="loginPrompt">Login!</button></span>
+        <span><button id="registerPrompt">Register!</button></span>
+        <div id="login">
+            <form>
+                <div>
+                  <label for="email">Username:</label>
+                  <input id="loginUsr" type="text" placeholder="Enter username">
+                </div>
+                <div>
+                  <label for="pwd">Password:</label>
+                  <input id="loginPwd" type="password" placeholder="Enter password">
+                </div>
+                <button id="loginBut">Submit</button>
+            </form>
+        </div>
+        <div id="registration">
+            <form>
+                <div>
+                    <label>Enter Username:</label>
+                    <input id="registerUsr" type="text" placeholder="Enter username">
+                </div>
+                <div>
+                    <label>Enter Email:</label>
+                    <input id="registerEmail" type="email" placeholder="Enter email">
+                </div>
+                <div>
+                    <label>Enter Password:</label>
+                    <input id="registerPwd" type="password" placeholder="Enter password">
+                </div>
+                <button id="registerBut">Register</button>
+            </form>
+        </div>
+    </div>
+    <p><a href="index.html">Back</a></p>
+</body>
+</html>
