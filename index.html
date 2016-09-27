@@ -39,17 +39,20 @@
     </div>
     
     <div style="position:absolute;top:20%;left:30%;right:30%;bottom:55%">
-        <p id="info"></p>
+        <p>The current weather is: </p>
+        <p id="winfo"></p>
+        <p>Current Temperature:</p>
+        <p id="tinfo"></p>
         <script>
             $("#searchbutton").click(function(){
-                var input_text = $("#searchbox").val();
-                $("#info").html(input_text);
-                console.log('this is the text:'+input_text);
-                //var api = 'http://api.openweathermap.org/data/2.5/weather?q='+city+'&appid=';
-                
-                //$.getJSON(api, function(data){
-                    
-                //});
+                var city = $("#searchbox").val();
+                console.log('this is the text:'+city);
+                var api = 'http://api.openweathermap.org/data/2.5/weather?q='+city+'&appid=';
+                document.getElementById("winfo").innerHTML = city.weather[0].description;
+                document.getElementById("tinfo").innerHTML = city.main.temp;
+                /*$.getJSON(api, function(city){
+                    var weatherDescription = city.weather[0].description;
+                });*/
             });
         </script>
     </div>
