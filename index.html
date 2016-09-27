@@ -25,7 +25,20 @@
             <a href="resultpage.html"> next page </a>
     </div>
     <!- content, where the weather thing would be>
-    
+    <div style="position:absolute;top:20%;left:30%;right:30%;bottom:55%">
+        <p id="data"></p>
+        <script>
+            $("searchbutton").click(function(){
+                var input_text = document.getElementById("searchbox").value;
+                $("#data").html(input_text);
+                //var api = 'http://api.openweathermap.org/data/2.5/weather?q='+city+'&appid=';
+                
+                //$.getJSON(api, function(data){
+                    
+                //});
+            });
+        </script>
+    </div>
     <div id="searchbox">
         <div>
             <!--This should now be properly centered vertically and horizontally-->
@@ -89,6 +102,7 @@
     <div id="help"type="text"style="top:60%;left:25%;right:25%;display:none">
         <p>Some kind of help will go here!</p>
     </div>
+    <a href="https://www.yahoo.com/?ilc=401" target="_blank"> <img src="https://poweredby.yahoo.com/purple.png" width="134" height="29"/> </a>
         <footer> Created by Chuck and Nick</footer>
     </body>
 </html>
