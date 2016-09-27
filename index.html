@@ -41,9 +41,9 @@
     <div style="position:absolute;top:20%;left:30%;right:30%;bottom:55%">
         <p id="info"></p>
         <script>
-            $("searchbutton").click(function(){
-                var input_text = document.getElementById("#searchbox").value;
-                $("#info").html(input_text);
+            $("#searchbutton").click(function(){
+                var input_text = $("#searchbox").val();
+                console.log('this is the text:'+input_text);
                 //var api = 'http://api.openweathermap.org/data/2.5/weather?q='+city+'&appid=';
                 
                 //$.getJSON(api, function(data){
