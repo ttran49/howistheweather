@@ -57,11 +57,17 @@ $(window ).load(function() {
     $("#drawbutton").click(draw);
     $("#erasebutton").click(erase);
 	$("#loginPrompt").click(function(){
-		hide_and_show("registration","login")
+		ReactDOM.render(<Login />, document.getElementById('login'));
 	});
 	$("#registerPrompt").click(function(){
 		hide_and_show("login","registration")
 	});
+    $("#registerBut").click(function(){
+                register($("#registerUsr").val(),$("#registerEmail").val(), $("#registerPwd").val());
+            });
+//            $("#loginBut").click(function(){
+//                login ($("#loginUsr").val(), $("#loginPwd").val());
+//            });
     
 });
 $(window).on("hashchange", function (){

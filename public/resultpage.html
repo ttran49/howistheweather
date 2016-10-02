@@ -9,6 +9,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/3.4.0/firebase.js"></script>
     <script type="text/javascript" src="script.js"></script>
+     <script src="https://fb.me/react-15.0.0.js"></script>
+    <script src="https://fb.me/react-dom-15.0.0.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+    <!-- ReactFire -->
+    <script src="https://cdn.firebase.com/libs/reactfire/1.0.0/reactfire.min.js"></script>
     <script>
         "use strict";
         // Initialize Firebase
@@ -20,7 +25,7 @@
             messagingSenderId: "1069239150549"
         };
         firebase.initializeApp(config);
-        
+
         var dataref= firebase.database().ref("Auth");
         function register(username, email, pwd){
             dataref.child(username).set({email: email, password: pwd});
@@ -30,7 +35,7 @@
               if(snapshot.val().password.localeCompare(pwd)==0){
                 //successfully log in. do something
                 alert("Successful login as " + username);
-                
+
               } else {
                   alert("Wrong password!");
               }
@@ -38,15 +43,6 @@
                 alert("Wrong username or have not registered");
             });
         }
-        $(window).load(function(){
-            $("#registerBut").click(function(){
-                register($("#registerUsr").val(),$("#registerEmail").val(), $("#registerPwd").val());
-            });
-            $("#loginBut").click(function(){
-                login ($("#loginUsr").val(), $("#loginPwd").val());
-            });
-        });
-        
     </script>
 </head>
 <body>
@@ -117,39 +113,78 @@
         </div>
     </div>
     <div>
-        <span><button id="loginPrompt">Login!</button></span>
-        <span><button id="registerPrompt">Register!</button></span>
-        <div id="login">
-            <form>
-                <div>
-                  <label for="email">Username:</label>
-                  <input id="loginUsr" type="text" placeholder="Enter username">
-                </div>
-                <div>
-                  <label for="pwd">Password:</label>
-                  <input id="loginPwd" type="password" placeholder="Enter password">
-                </div>
-                <button id="loginBut">Submit</button>
-            </form>
-        </div>
-        <div id="registration">
-            <form>
-                <div>
-                    <label>Enter Username:</label>
-                    <input id="registerUsr" type="text" placeholder="Enter username">
-                </div>
-                <div>
-                    <label>Enter Email:</label>
-                    <input id="registerEmail" type="email" placeholder="Enter email">
-                </div>
-                <div>
-                    <label>Enter Password:</label>
-                    <input id="registerPwd" type="password" placeholder="Enter password">
-                </div>
-                <button id="registerBut">Register</button>
-            </form>
-        </div>
+        <div id="buttons"></div>
+        <div id="login"></div>
+        <div id="registration"></div>
     </div>
     <p><a href="index.html">Back</a></p>
+    <div id="test"></div>
+    <script type="text/babel">
+        var Login= React.createClass({
+            render: function(){
+                return(
+                    <div>
+                        <form>
+                            <div>
+                              <label for="email">Username:</label>
+                                <input id="loginUsr" type="text" placeholder="Enter username"></input>
+                            </div>
+                            <div>
+                              <label for="pwd">Password:</label>
+                                <input id="loginPwd" type="password" placeholder="Enter password"></input>
+                            </div>
+                            <button id="loginBut" onClick={this.onClick.bind(null, $("#loginUsr").val(), $("#loginPwd").val())}>Submit</button>
+                        </form>
+                    </div>
+                )
+            },
+            onClick: function(username, pwd){
+                login(username,pwd);
+            }
+        });
+        var Regstration = React.createClass({
+            render: function(){
+                return (
+                    <div>
+                        <form>
+                            <div>
+                                <label>Enter Username:</label>
+                                <input id="registerUsr" type="text" placeholder="Enter username"></input>
+                            </div>
+                            <div>
+                                <label>Enter Email:</label>
+                                <input id="registerEmail" type="email" placeholder="Enter email"></input>
+                            </div>
+                            <div>
+                                <label>Enter Password:</label>
+                                <input id="registerPwd" type="password" placeholder="Enter password"></input>
+                            </div>
+                            <button id="registerBut" onClick={this.onClick.bind(null, $("#registerUsr").val(), $("#registerEmail").val(), $("#registerPwd").val())}>Register</button>
+                        </form>
+                    </div>
+                )
+            },
+            onClick: function(username, email, pwd){
+                register(username, email, pwd);
+            }
+        });
+        var Button = React.createClass({
+            render: function(){
+                return (
+                    <div>
+                        <span><button id="login" onClick={this.onClick.bind(this, 'login')}>Login!</button></span>
+                        <span><button id="register" onClick={this.onClick.bind(this, 'registration')}>Register!</button></span>
+                    </div>
+                )
+            },
+            onclick: function (type){
+                if("login".localeCompare(type)==0)
+                    ReactDOM.render(<Login />, document.getElementById('login'));
+                else if ("registration".localeCompare(type)==0)
+                    ReactDOM.render(<Regstration />, document.getElementById('registration'));
+            }
+        });
+        ReactDOM.render(<Button />, document.getElementById('buttons'));
+    </script>
 </body>
 </html>
