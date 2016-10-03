@@ -25,7 +25,6 @@
             messagingSenderId: "1069239150549"
         };
         firebase.initializeApp(config);
-
         var dataref= firebase.database().ref("Auth");
         function register(username, email, pwd){
             dataref.child(username).set({email: email, password: pwd});
@@ -34,14 +33,28 @@
             return firebase.database().ref('/Auth/' + username).once('value').then(function(snapshot) {
               if(snapshot.val().password.localeCompare(pwd)==0){
                 //successfully log in. do something
-                alert("Successful login as " + username);
+               //console.log("true");
+                return true;
 
               } else {
-                  alert("Wrong password!");
+                 // console.log("false");
+                  return false;
               }
             }).catch(function(){
-                alert("Wrong username or have not registered");
+               // console.log("false");
+                return false;
             });
+        }
+        function forgotpwd(username){
+            var pwd=null;
+            firebase.database().ref('Auth/' + username).once('value').then(function(snapshot){
+                console.log("here");
+                pwd= snapshot.val().password;
+            }).catch(function(){
+                console.log("here11");
+                pwd= 1;
+            });
+            return pwd;
         }
     </script>
 </head>
@@ -58,32 +71,7 @@
         </div>
     </div>
     
-    <! table for hw1 requirement>
-    <div id="table">
-        <table style="width:80%;">
-            <tr>
-                <th>Tasks to be done</th>
-                <th>Chuck</th>
-                <th>Nick</th>
-            </tr>
-            <tr>
-                <td>Adding contents to homepage</td>
-                <td>&#x2705</td>
-                <td>&#x2705</td>
-            </tr>
-            <tr>
-                <td>Adding stuff to result page</td>
-                <td>&#x2705</td>
-                <td>&#x2705</td>
-            </tr>
-            <tr>
-                <td>Animate?</td>
-                <td>&#x2705</td>
-                <td>&#x2705</td>
-            </tr>
-        </table>
-    </div>
-    <p>I have ran out of ideas to create a page about therefore the next <a href="randompage.html" style="color:blue;">page</a> won't be related to the project. -Chuck</p>
+    <p>next <a href="randompage.html" style="color:blue;">page</a>-Chuck</p>
     <div id="choices">
         <span>
             <button onclick="hide_and_show('catvideo','dogvideo');">DOG video</button>
@@ -113,14 +101,19 @@
         </div>
     </div>
     <div>
-        <div id="buttons"></div>
+        <div id="buttons">
+            <span id="button1"></span>
+            <span id="button2"></span>
+            <span id = "button3"></span>
+        </div>
         <div id="login"></div>
         <div id="registration"></div>
     </div>
     <p><a href="index.html">Back</a></p>
     <div id="test"></div>
+    <footer id="footer">You haven't signed in!</footer>
     <script type="text/babel">
-        var Login= React.createClass({
+        var LoginStuff= React.createClass({
             render: function(){
                 return(
                     <div>
@@ -133,16 +126,19 @@
                               <label for="pwd">Password:</label>
                                 <input id="loginPwd" type="password" placeholder="Enter password"></input>
                             </div>
-                            <button id="loginBut" onClick={this.onClick.bind(null, $("#loginUsr").val(), $("#loginPwd").val())}>Submit</button>
+                            <button id="loginBut" onClick={this.onClick.bind(this, $("#loginUsr").val(), $("#loginPwd").val())}>Submit</button>
                         </form>
                     </div>
                 )
             },
             onClick: function(username, pwd){
-                login(username,pwd);
+                if(login(username,pwd))
+                    document.getElementById("footer").innerHTML="YOU HAVE LOGGED IN AS " + username;
+                else
+                    alert("Wrong username/password!");
             }
         });
-        var Regstration = React.createClass({
+        var RegisterStuff = React.createClass({
             render: function(){
                 return (
                     <div>
@@ -159,7 +155,7 @@
                                 <label>Enter Password:</label>
                                 <input id="registerPwd" type="password" placeholder="Enter password"></input>
                             </div>
-                            <button id="registerBut" onClick={this.onClick.bind(null, $("#registerUsr").val(), $("#registerEmail").val(), $("#registerPwd").val())}>Register</button>
+                            <button id="registerBut" onClick={this.onClick.bind(this, $("#registerUsr").val(), $("#registerEmail").val(), $("#registerPwd").val())}>Register</button>
                         </form>
                     </div>
                 )
@@ -168,23 +164,83 @@
                 register(username, email, pwd);
             }
         });
-        var Button = React.createClass({
+        var ForgotStuff = React.createClass({
             render: function(){
                 return (
                     <div>
-                        <span><button id="login" onClick={this.onClick.bind(this, 'login')}>Login!</button></span>
-                        <span><button id="register" onClick={this.onClick.bind(this, 'registration')}>Register!</button></span>
+                        <form>
+                            <div>
+                                <label>Enter Username:</label>
+                                <input id="registerUsr" type="text" placeholder="Enter username"></input>
+                            </div>
+                            <button id="registerBut" onClick={this.onClick.bind(this, $("#registerUsr").val())}>Go!</button>
+                        </form>
                     </div>
                 )
             },
-            onClick: function (type){
-                if("login".localeCompare(type)==0)
-                    ReactDOM.render(<Login />, document.getElementById('login'));
-                else if ("registration".localeCompare(type)==0)
-                    ReactDOM.render(<Regstration />, document.getElementById('registration'));
+            onClick: function(username){
+                var pwd=forgotpwd(username);
+                if (pwd != null){
+                    console.log(pwd);
+                    alert("Your password is " + pwd);
+                }
+                else{
+                    console.log(pwd);
+                    alert("There is no User as provided");
+                }
             }
         });
-        ReactDOM.render(<Button />, document.getElementById('buttons'));
+        var Register = React.createClass({
+            getInitialState: function() {
+                return { show: false };
+            },
+            onClick: function() {
+                this.setState({ show: true });
+            },
+            render: function(){
+                return (
+                    <div>
+                        <button onClick={this.onClick}>Register!</button>
+                        { this.state.show ? <RegisterStuff /> : null }
+                    </div>
+                )
+            }
+        });
+        var Login = React.createClass({
+            getInitialState: function() {
+                return { show: false };
+            },
+            onClick: function() {
+                this.setState({ show: true });
+            },
+            render: function(){
+                return (
+                    <div>
+                        <button onClick={this.onClick}>Login!</button>
+                        { this.state.show ? <LoginStuff /> : null }
+                    </div>
+                )
+            }
+        });
+        var Forgot = React.createClass({
+            getInitialState: function() {
+                return { show: false };
+            },
+            onClick: function() {
+                this.setState({ show: true });
+            },
+            render: function(){
+                return (
+                    <div>
+                        <button onClick={this.onClick}>Forgot Password!</button>
+                        { this.state.show ? <ForgotStuff /> : null }
+                    </div>
+                )
+            }
+        });
+        ReactDOM.render(<Register />, document.getElementById('button1'));
+        ReactDOM.render(<Login />, document.getElementById('button2'));
+        ReactDOM.render(<Forgot />, document.getElementById('button3'));
     </script>
 </body>
 </html>

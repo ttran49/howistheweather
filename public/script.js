@@ -55,20 +55,7 @@ function erase(){
 
 $(window ).load(function() {
     $("#drawbutton").click(draw);
-    $("#erasebutton").click(erase);
-	$("#loginPrompt").click(function(){
-		ReactDOM.render(<Login />, document.getElementById('login'));
-	});
-	$("#registerPrompt").click(function(){
-		hide_and_show("login","registration")
-	});
-    $("#registerBut").click(function(){
-                register($("#registerUsr").val(),$("#registerEmail").val(), $("#registerPwd").val());
-            });
-//            $("#loginBut").click(function(){
-//                login ($("#loginUsr").val(), $("#loginPwd").val());
-//            });
-    
+    $("#erasebutton").click(erase);    
 });
 $(window).on("hashchange", function (){
 //console.log(location.hash);
