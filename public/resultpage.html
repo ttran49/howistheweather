@@ -56,6 +56,21 @@
             });
             return pwd;
         }
+        function getWeather(location){
+            console.log("here");
+            var con= "http://api.wunderground.com/api/b40fe05c89327f5c/conditions/q/";
+            var url= con + location + ".json";
+            console.log(url);
+            var weather = new XMLHttpRequest();
+            weather.open("GET", url, false);
+            weather.send(null);
+
+            var response= JSON.parse(weather.response).current_observation;
+            var location= response.display_location.full;
+            var temp= response.temp_f +"F";
+
+            $("#newSpace").text(location+" is "+temp);
+        }
     </script>
 </head>
 <body>
@@ -70,6 +85,9 @@
             <input type="button" value="Search" id="searchbutton">
         </div>
     </div>
+    
+    <div id="newControl"></div>
+    <div id="newSpace"></div>
     
     <p>next <a href="randompage.html" style="color:blue;">page</a>-Chuck</p>
     <div id="choices">
@@ -117,7 +135,6 @@
             render: function(){
                 return(
                     <div>
-                        <form>
                             <div>
                               <label for="email">Username:</label>
                                 <input id="loginUsr" type="text" placeholder="Enter username"></input>
@@ -126,12 +143,13 @@
                               <label for="pwd">Password:</label>
                                 <input id="loginPwd" type="password" placeholder="Enter password"></input>
                             </div>
-                            <button id="loginBut" onClick={this.onClick.bind(this, $("#loginUsr").val(), $("#loginPwd").val())}>Submit</button>
-                        </form>
+                            <button id="loginBut" onClick={this.onClick}>Submit</button>
                     </div>
                 )
             },
-            onClick: function(username, pwd){
+            onClick: function(){
+                var username=$("#loginUsr").val();
+                var pwd=$("#loginPwd").val();
                 if(login(username,pwd))
                     document.getElementById("footer").innerHTML="YOU HAVE LOGGED IN AS " + username;
                 else
@@ -142,7 +160,6 @@
             render: function(){
                 return (
                     <div>
-                        <form>
                             <div>
                                 <label>Enter Username:</label>
                                 <input id="registerUsr" type="text" placeholder="Enter username"></input>
@@ -155,12 +172,14 @@
                                 <label>Enter Password:</label>
                                 <input id="registerPwd" type="password" placeholder="Enter password"></input>
                             </div>
-                            <button id="registerBut" onClick={this.onClick.bind(this, $("#registerUsr").val(), $("#registerEmail").val(), $("#registerPwd").val())}>Register</button>
-                        </form>
+                            <button id="registerBut" onClick={this.onClick}>Register</button>
                     </div>
                 )
             },
             onClick: function(username, email, pwd){
+                var username=$("#registerUsr").val();
+                var email=$("#registerEmail").val();
+                var pwd=$("#registerPwd").val();
                 register(username, email, pwd);
             }
         });
@@ -168,17 +187,16 @@
             render: function(){
                 return (
                     <div>
-                        <form>
                             <div>
                                 <label>Enter Username:</label>
                                 <input id="registerUsr" type="text" placeholder="Enter username"></input>
                             </div>
-                            <button id="registerBut" onClick={this.onClick.bind(this, $("#registerUsr").val())}>Go!</button>
-                        </form>
+                            <button id="registerBut" onClick={this.onClick}>Go!</button>
                     </div>
                 )
             },
-            onClick: function(username){
+            onClick: function(){
+                var username=$("#registerUsr").val();
                 var pwd=forgotpwd(username);
                 if (pwd != null){
                     console.log(pwd);
@@ -238,9 +256,28 @@
                 )
             }
         });
+        var Weather= React.createClass({
+            render: function(){
+                return (
+                    <div>
+                        <div>
+                            <label>Enter A Location:</label>
+                            <input id="searchLocation" type="text" placeholder="Enter a location" />
+                        </div>
+                        <button id="shownew" onClick={this.onClick}>Weather!</button>
+                    </div>
+                )
+            },
+            onClick: function(){
+                var location= $("#searchLocation").val();
+                console.log(location);
+                getWeather(location);
+            }
+        });
         ReactDOM.render(<Register />, document.getElementById('button1'));
         ReactDOM.render(<Login />, document.getElementById('button2'));
         ReactDOM.render(<Forgot />, document.getElementById('button3'));
+        ReactDOM.render(<Weather />, document.getElementById('newControl'));
     </script>
 </body>
 </html>
