@@ -32,38 +32,10 @@
             <a href="resultpage.html"> next page </a>
     </div>
     <!- content, where the weather thing would be>
-    
-    <!--div id="searchbar">
-        <div>
-            <form style="position:absolute;left:25%;right:25%">
-                <button id="searchbutton"style= "float:right"> Search!</button>
-                <span style="display:block;overflow: hidden;">
-                    <input style="width:100%" type="text" placeholder="Search for location..." required id="searchbox">
-                </span>
-            </form>
+    <div id="searchbuttonholder">
         </div>
-    </div-->
-    
-    <!--div style="position:absolute;top:20%;left:30%;right:30%;bottom:55%">
-        <p>The current weather is: </p>
-        <p id="winfo"></p>
-        <p>Current Temperature:</p>
-        <p id="tinfo"></p>
-        <script>
-            $("#searchbutton").click(function(){
-                var city = $("#searchbox").val();
-                console.log('this is the text:'+city);
-                var api = 'http://api.openweathermap.org/data/2.5/weather?q='+city+'&appid=5e4238139e471d1f84c2d0977305e489';
-//                 document.getElementById("winfo").innerHTML = city.weather[0].description;
-//                 document.getElementById("tinfo").innerHTML = city.main.temp;
-                $.getJSON(api, function(city){
-                    var weatherDescription = city.weather[0].description;
-                    var weatherTemperature = city.main.temp;
-                    console.log(weatherDescription);
-                    console.log(weatherTemperature);
-                });
-            });
-        </script-->
+        <div id="searchresultholder">
+        </div>
     
     <script type="text/babel">
         var SearchStuff = React.createClass({
@@ -73,13 +45,15 @@
                         <div>
                             <span id="searchSpan">
                                 <input type="text" placeholder="Search for location..." required id="searchbox">
-                                <button id="searchbutton"onClick={this.onClick.bind(this, $("#searchbox"))}style={float:"right"}> Search!</button>
+                                <button id="searchbutton" onClick={this.onClick}> Search!</button>
                             </span>
                         </div>
                     </div>
                 )
             },
-            onClick: function(searchboxText){
+            onClick: function(){
+                var searchboxText= $("#searchbox").val();
+                 ReactDOM.render(<Search />, document.getElementById('searchresultholder'));
                 search(searchboxText);
             }
         });
@@ -98,17 +72,15 @@
                 var city = $("#searchbox").val();
                 console.log('this is the text:'+city);
                 var api = 'http://api.openweathermap.org/data/2.5/weather?q='+city+'&appid=5e4238139e471d1f84c2d0977305e489';
-                document.getElementById("winfo").innerHTML = city.weather[0].description;
-                document.getElementById("tinfo").innerHTML = city.main.temp;
-/*                $.getJSON(api, function(city){
-                    var weatherDescription = city.weather[0].description;
-                    var weatherTemperature = city.main.temp;
+                $.getJSON(api, function(dataReturnedFromAJAXCall){
+                    var weatherDescription = dataReturnedFromAJAXCall.weather[0].description;
+                    var weatherTemperature = dataReturnedFromAJAXCall.main.temp;
                     console.log(weatherDescription);
                     console.log(weatherTemperature);
-                });*/
+                });
             }
         });
-        ReactDOM.render(<Search />, document.getElementById('searchbutton'));
+        ReactDOM.render(<SearchStuff />, document.getElementById('searchbuttonholder'));
     </script>
     <div id="content"style="position:absolute;top:55%;width:50%;left:25%;right:25%">
         <div id="left">
