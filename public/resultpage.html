@@ -56,6 +56,13 @@
             });
             return pwd;
         }
+        var url= "http://api.wunderground.com/api/b40fe05c89327f5c/conditions/q/VA/Fair_Fax.json";
+        var weather = new XMLHttpRequest();
+        weather.open("GET", url, false);
+        weather.send(null);
+        
+        var response= JSON.parse(weather.response).current_observation.display_location.full;
+        console.log(response);
     </script>
 </head>
 <body>
@@ -70,6 +77,9 @@
             <input type="button" value="Search" id="searchbutton">
         </div>
     </div>
+    
+    <button id="shownew">News!</button>
+    <div id="newSpace"></div>
     
     <p>next <a href="randompage.html" style="color:blue;">page</a>-Chuck</p>
     <div id="choices">
