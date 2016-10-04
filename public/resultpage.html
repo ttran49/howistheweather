@@ -56,13 +56,21 @@
             });
             return pwd;
         }
-        var url= "http://api.wunderground.com/api/b40fe05c89327f5c/conditions/q/VA/Fair_Fax.json";
-        var weather = new XMLHttpRequest();
-        weather.open("GET", url, false);
-        weather.send(null);
-        
-        var response= JSON.parse(weather.response).current_observation.display_location.full;
-        console.log(response);
+        function getWeather(location){
+            console.log("here");
+            var con= "http://api.wunderground.com/api/b40fe05c89327f5c/conditions/q/";
+            var url= con + location + ".json";
+            console.log(url);
+            var weather = new XMLHttpRequest();
+            weather.open("GET", url, false);
+            weather.send(null);
+
+            var response= JSON.parse(weather.response).current_observation;
+            var location= response.display_location.full;
+            var temp= response.temp_f +"F";
+
+            $("#newSpace").text(location+" is "+temp);
+        }
     </script>
 </head>
 <body>
@@ -78,7 +86,7 @@
         </div>
     </div>
     
-    <button id="shownew">News!</button>
+    <div id="newControl"></div>
     <div id="newSpace"></div>
     
     <p>next <a href="randompage.html" style="color:blue;">page</a>-Chuck</p>
@@ -248,9 +256,27 @@
                 )
             }
         });
+        var Weather= React.createClass({
+            render: function(){
+                return (
+                    <div>
+                        <div>
+                            <label>Enter A Location:</label>
+                            <input id="searchLocation" type="text" placeholder="Enter a location" />
+                        </div>
+                        <button id="shownew" onClick={this.onClick.bind(this, $("#searchLocation").val())}>Weather!</button>
+                    </div>
+                )
+            },
+            onClick: function(location){
+                console.log(location);
+                getWeather(location);
+            }
+        });
         ReactDOM.render(<Register />, document.getElementById('button1'));
         ReactDOM.render(<Login />, document.getElementById('button2'));
         ReactDOM.render(<Forgot />, document.getElementById('button3'));
+        ReactDOM.render(<Weather />, document.getElementById('newControl'));
     </script>
 </body>
 </html>
