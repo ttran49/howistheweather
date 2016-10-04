@@ -54,14 +54,14 @@
             $("#searchbutton").click(function(){
                 var city = $("#searchbox").val();
                 console.log('this is the text:'+city);
-                var api = 'http://api.openweathermap.org/data/2.5/weather?q='+city+'&appid=AIzaSyBdjt0qVS4Kqe99efVN3CJZOoa9pXGUlNE';
+                var api = 'http://api.openweathermap.org/data/2.5/weather?q='+city+'&appid=5e4238139e471d1f84c2d0977305e489';
                 document.getElementById("winfo").innerHTML = city.weather[0].description;
                 document.getElementById("tinfo").innerHTML = city.main.temp;
                 /*$.getJSON(api, function(city){
                     var weatherDescription = city.weather[0].description;
                 });*/
             });
-            var SearchStuff = React.createClass({
+/*            var SearchStuff = React.createClass({
                 render: function(){
                     return(
                         <div>
@@ -74,7 +74,7 @@
                 onClick: function(){
                     
                 }
-            });
+            });*/
         </script>
     </div>
     
