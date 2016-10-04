@@ -18,8 +18,12 @@ body {
 }
 /*it doesn't look like we used searchbar at all in index.html. Why does this exist?*/
 #searchbar {
-    display: inline-block;
+    /*display: inline-block;
     justify-content: center;/*why were there 2 of this line?*/
+    padding:3px 10px;
+    color: black;/*was transparent*/
+    display:table-cell;
+    width:100vw;
 }
 #searchbox {
     padding:3px 10px;
