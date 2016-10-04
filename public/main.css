@@ -46,6 +46,13 @@ body {
     display:block;
     overflow: hidden;
 }
+#weatherDisplay {
+    position:absolute;
+    top:20%;
+    left:30%;
+    right:30%;
+    bottom:55%;
+}
 #news {
     position:absolute;
     color:black;
