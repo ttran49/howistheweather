@@ -71,11 +71,10 @@
                 return(
                     <div id="searchbar">
                         <div>
-                            <!--This should now be properly centered vertically and horizontally-->
                             <form style="position:absolute;left:25%;right:25%">
                                 <span style="display:block;overflow: hidden;">
                                     <input style="width:100%" type="text" placeholder="Search for location..." required id="searchbox">
-                                <button id="searchbutton"onClick={this.onClick.bind(this, $("#searchbox"))}style= "float:right"> Search!</button>
+                                <button id="searchbutton"onClick={this.onClick.bind(this, $("#searchbox"))}style={float:"right"}> Search!</button>
                                 </span>
                             </form>
                         </div>
