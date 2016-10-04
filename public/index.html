@@ -33,7 +33,7 @@
     </div>
     <!- content, where the weather thing would be>
     
-    <div id="searchbar">
+    <!--div id="searchbar">
         <div>
             <!--This should now be properly centered vertically and horizontally-->
             <form style="position:absolute;left:25%;right:25%">
@@ -43,7 +43,7 @@
                 </span>
             </form>
         </div>
-    </div>
+    </div-->
     
     <!--div style="position:absolute;top:20%;left:30%;right:30%;bottom:55%">
         <p>The current weather is: </p>
@@ -68,6 +68,26 @@
     
     <script>
         var SearchStuff = React.createClass({
+            render: function(){
+                return(
+                    <div id="searchbar">
+                        <div>
+                            <!--This should now be properly centered vertically and horizontally-->
+                            <form style="position:absolute;left:25%;right:25%">
+                                <button id="searchbutton"onClick={this.onClick.bind(this, $("#searchbox"))}style= "float:right"> Search!</button>
+                                <span style="display:block;overflow: hidden;">
+                                    <input style="width:100%" type="text" placeholder="Search for location..." required id="searchbox">
+                                </span>
+                            </form>
+                        </div>
+                    </div>
+                )
+            },
+            onClick: function(searchboxText){
+                search(searchboxText);
+            }
+        });
+        var Search = React.createClass({
             render: function(){
                 return(
                     <div style="position:absolute;top:20%;left:30%;right:30%;bottom:55%">
