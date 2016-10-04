@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Weather Results</title>
+    <meta name="description" content="A weather app for SWE432.">
+    <link rel="stylesheet" href="main.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/3.4.0/firebase.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+     <script src="https://fb.me/react-15.0.0.js"></script>
+    <script src="https://fb.me/react-dom-15.0.0.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+    <!-- ReactFire -->
+    <script src="https://cdn.firebase.com/libs/reactfire/1.0.0/reactfire.min.js"></script>
+    <script>
+        "use strict";
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBdjt0qVS4Kqe99efVN3CJZOoa9pXGUlNE",
+            authDomain: "swe432-firebase-stuff.firebaseapp.com",
+            databaseURL: "https://swe432-firebase-stuff.firebaseio.com",
+            storageBucket: "swe432-firebase-stuff.appspot.com",
+            messagingSenderId: "1069239150549"
+        };
+        firebase.initializeApp(config);
+        var dataref= firebase.database().ref("Auth");
+        function register(username, email, pwd){
+            dataref.child(username).set({email: email, password: pwd});
+        }
+        function login (username, pwd){
+            return firebase.database().ref('/Auth/' + username).once('value').then(function(snapshot) {
+              if(snapshot.val().password.localeCompare(pwd)==0){
+                //successfully log in. do something
+               //console.log("true");
+                return true;
+
+              } else {
+                 // console.log("false");
+                  return false;
+              }
+            }).catch(function(){
+               // console.log("false");
+                return false;
+            });
+        }
+        function forgotpwd(username){
+            var pwd=null;
+            firebase.database().ref('Auth/' + username).once('value').then(function(snapshot){
+                console.log("here");
+                pwd= snapshot.val().password;
+            }).catch(function(){
+                console.log("here11");
+                pwd= 1;
+            });
+            return pwd;
+        }
+        function getWeather(location){
+            console.log("here");
+            var con= "http://api.wunderground.com/api/b40fe05c89327f5c/conditions/q/";
+            var url= con + location + ".json";
+            console.log(url);
+            var weather = new XMLHttpRequest();
+            weather.open("GET", url, false);
+            weather.send(null);
+
+            var response= JSON.parse(weather.response).current_observation;
+            var location= response.display_location.full;
+            var temp= response.temp_f +"F";
+
+            $("#newSpace").text(location+" is "+temp);
+        }
+    </script>
+</head>
+<body>
+    <! the static bar at the top>
+    <div id="actionbar" style="overflow:auto; background-image: url(https://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg);">
+        <div style="float:left;width:60%;overflow:hidden;height:44px">
+            <b><a href="index.html" title="Back">&#x21da GO BACK</a></b>
+            <div style="float:right;width:30%;overflow:hidden;height:44px">How's the weather?</div>
+            </div>
+        <div style="float:right;width:20%;overflow:hidden;height:44px;">
+            <input type="text" placeholder="Search for location ..." required id="searchbox">
+            <input type="button" value="Search" id="searchbutton">
+        </div>
+    </div>
+    
+    <div id="newControl"></div>
+    <div id="newSpace"></div>
+    
+    <p>next <a href="randompage.html" style="color:blue;">page</a>-Chuck</p>
+    <div id="choices">
+        <span>
+            <button onclick="hide_and_show('catvideo','dogvideo');">DOG video</button>
+             or
+        </span>
+        <span>
+            <button onclick="hide_and_show('dogvideo','catvideo');">CAT video</button>
+        </span>
+        <span>
+            <button onclick="hide_all('catvideo','dogvideo');"> Reset!</button>
+        </span>
+    </div>
+    
+    <div id="catvideo">
+    <p>Also here is a <b>cat</b> video and you can't fast forward :)</p>
+    <iframe width="900" height="506" src="https://www.youtube-nocookie.com/embed/G8KpPw303PY?controls=0" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <div id="dogvideo">
+        <p>Also here is a <b>dog</b> video and you can't fast forward :)</p>
+        <iframe width="900" height="506" src="https://www.youtube-nocookie.com/embed/GF60Iuh643I?controls=0" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <div id="choices">
+        <span><button id="drawbutton">Draw something</button></span>
+        <span><button id="erasebutton">Erase!</button></span>
+        <div id="drawspace">
+           
+        </div>
+    </div>
+    <div>
+        <div id="buttons">
+            <span id="button1"></span>
+            <span id="button2"></span>
+            <span id = "button3"></span>
+        </div>
+        <div id="login"></div>
+        <div id="registration"></div>
+    </div>
+    <p><a href="index.html">Back</a></p>
+    <div id="test"></div>
+    <footer id="footer">You haven't signed in!</footer>
+    <script type="text/babel">
+        var LoginStuff= React.createClass({
+            render: function(){
+                return(
+                    <div>
+                        <form>
+                            <div>
+                              <label for="email">Username:</label>
+                                <input id="loginUsr" type="text" placeholder="Enter username"></input>
+                            </div>
+                            <div>
+                              <label for="pwd">Password:</label>
+                                <input id="loginPwd" type="password" placeholder="Enter password"></input>
+                            </div>
+                            <button id="loginBut" onClick={this.onClick.bind(this, $("#loginUsr").val(), $("#loginPwd").val())}>Submit</button>
+                        </form>
+                    </div>
+                )
+            },
+            onClick: function(username, pwd){
+                if(login(username,pwd))
+                    document.getElementById("footer").innerHTML="YOU HAVE LOGGED IN AS " + username;
+                else
+                    alert("Wrong username/password!");
+            }
+        });
+        var RegisterStuff = React.createClass({
+            render: function(){
+                return (
+                    <div>
+                        <form>
+                            <div>
+                                <label>Enter Username:</label>
+                                <input id="registerUsr" type="text" placeholder="Enter username"></input>
+                            </div>
+                            <div>
+                                <label>Enter Email:</label>
+                                <input id="registerEmail" type="email" placeholder="Enter email"></input>
+                            </div>
+                            <div>
+                                <label>Enter Password:</label>
+                                <input id="registerPwd" type="password" placeholder="Enter password"></input>
+                            </div>
+                            <button id="registerBut" onClick={this.onClick.bind(this, $("#registerUsr").val(), $("#registerEmail").val(), $("#registerPwd").val())}>Register</button>
+                        </form>
+                    </div>
+                )
+            },
+            onClick: function(username, email, pwd){
+                register(username, email, pwd);
+            }
+        });
+        var ForgotStuff = React.createClass({
+            render: function(){
+                return (
+                    <div>
+                        <form>
+                            <div>
+                                <label>Enter Username:</label>
+                                <input id="registerUsr" type="text" placeholder="Enter username"></input>
+                            </div>
+                            <button id="registerBut" onClick={this.onClick.bind(this, $("#registerUsr").val())}>Go!</button>
+                        </form>
+                    </div>
+                )
+            },
+            onClick: function(username){
+                var pwd=forgotpwd(username);
+                if (pwd != null){
+                    console.log(pwd);
+                    alert("Your password is " + pwd);
+                }
+                else{
+                    console.log(pwd);
+                    alert("There is no User as provided");
+                }
+            }
+        });
+        var Register = React.createClass({
+            getInitialState: function() {
+                return { show: false };
+            },
+            onClick: function() {
+                this.setState({ show: true });
+            },
+            render: function(){
+                return (
+                    <div>
+                        <button onClick={this.onClick}>Register!</button>
+                        { this.state.show ? <RegisterStuff /> : null }
+                    </div>
+                )
+            }
+        });
+        var Login = React.createClass({
+            getInitialState: function() {
+                return { show: false };
+            },
+            onClick: function() {
+                this.setState({ show: true });
+            },
+            render: function(){
+                return (
+                    <div>
+                        <button onClick={this.onClick}>Login!</button>
+                        { this.state.show ? <LoginStuff /> : null }
+                    </div>
+                )
+            }
+        });
+        var Forgot = React.createClass({
+            getInitialState: function() {
+                return { show: false };
+            },
+            onClick: function() {
+                this.setState({ show: true });
+            },
+            render: function(){
+                return (
+                    <div>
+                        <button onClick={this.onClick}>Forgot Password!</button>
+                        { this.state.show ? <ForgotStuff /> : null }
+                    </div>
+                )
+            }
+        });
+        var Weather= React.createClass({
+            render: function(){
+                return (
+                    <div>
+                        <div>
+                            <label>Enter A Location:</label>
+                            <input id="searchLocation" type="text" placeholder="Enter a location" />
+                        </div>
+                        <button id="shownew" onClick={this.onClick.bind(this, $("#searchLocation").val())}>Weather!</button>
+                    </div>
+                )
+            },
+            onClick: function(location){
+                console.log(location);
+                getWeather(location);
+            }
+        });
+        ReactDOM.render(<Register />, document.getElementById('button1'));
+        ReactDOM.render(<Login />, document.getElementById('button2'));
+        ReactDOM.render(<Forgot />, document.getElementById('button3'));
+        ReactDOM.render(<Weather />, document.getElementById('newControl'));
+    </script>
+</body>
+</html>
