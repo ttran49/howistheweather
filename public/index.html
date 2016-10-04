@@ -70,7 +70,7 @@
             componentWillMount: function(){
                 var city = $("#searchbox").val();
                 console.log('this is the text:'+city);
-                var api = 'http://api.openweathermap.org/data/2.5/weather?q='+city+'&appid=5e4238139e471d1f84c2d0977305e489';
+                var api = 'https://api.openweathermap.org/data/2.5/weather?q='+city+'&appid=5e4238139e471d1f84c2d0977305e489';
                 $.getJSON(api, function(dataReturnedFromAJAXCall){
                     var weatherDescription = dataReturnedFromAJAXCall.weather[0].description;
                     var weatherTemperature = dataReturnedFromAJAXCall.main.temp;
