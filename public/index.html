@@ -60,6 +60,8 @@
                 $.getJSON(api, function(city){
                     var weatherDescription = city.weather[0].description;
                     var weatherTemperature = city.main.temp;
+                    console.log(weatherDescription);
+                    console.log(weatherTemperature);
                 });
             });
 /*            var SearchStuff = React.createClass({
