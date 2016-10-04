@@ -65,14 +65,14 @@
             });
         </script-->
     
-    <script>
+    <script type="text/babel">
         var SearchStuff = React.createClass({
             render: function(){
                 return(
                     <div id="searchbar">
                         <div>
                             <span id="searchSpan">
-                                <input style="width:100%" type="text" placeholder="Search for location..." required id="searchbox">
+                                <input type="text" placeholder="Search for location..." required id="searchbox">
                                 <button id="searchbutton"onClick={this.onClick.bind(this, $("#searchbox"))}style={float:"right"}> Search!</button>
                             </span>
                         </div>
@@ -86,7 +86,7 @@
         var Search = React.createClass({
             render: function(){
                 return(
-                    <div style="position:absolute;top:20%;left:30%;right:30%;bottom:55%">
+                    <div id="weatherDisplay">
                         <p>The current weather is: </p>
                         <p id="winfo"></p>
                         <p>Current Temperature:</p>
