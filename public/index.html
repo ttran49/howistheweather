@@ -45,7 +45,7 @@
         </div>
     </div>
     
-    <div style="position:absolute;top:20%;left:30%;right:30%;bottom:55%">
+    <!--div style="position:absolute;top:20%;left:30%;right:30%;bottom:55%">
         <p>The current weather is: </p>
         <p id="winfo"></p>
         <p>Current Temperature:</p>
@@ -55,8 +55,8 @@
                 var city = $("#searchbox").val();
                 console.log('this is the text:'+city);
                 var api = 'http://api.openweathermap.org/data/2.5/weather?q='+city+'&appid=5e4238139e471d1f84c2d0977305e489';
-//                document.getElementById("winfo").innerHTML = city.weather[0].description;
-//                document.getElementById("tinfo").innerHTML = city.main.temp;
+//                 document.getElementById("winfo").innerHTML = city.weather[0].description;
+//                 document.getElementById("tinfo").innerHTML = city.main.temp;
                 $.getJSON(api, function(city){
                     var weatherDescription = city.weather[0].description;
                     var weatherTemperature = city.main.temp;
@@ -64,23 +64,35 @@
                     console.log(weatherTemperature);
                 });
             });
-/*            var SearchStuff = React.createClass({
-                render: function(){
-                    return(
-                        <div>
-                            <form>
-                                
-                            </form>
-                        </div>
-                    )
-                },
-                onClick: function(){
-                    
-                }
-            });*/
-        </script>
-    </div>
+        </script-->
     
+    <script>
+        var SearchStuff = React.createClass({
+            render: function(){
+                return(
+                    <div style="position:absolute;top:20%;left:30%;right:30%;bottom:55%">
+                        <p>The current weather is: </p>
+                        <p id="winfo"></p>
+                        <p>Current Temperature:</p>
+                        <p id="tinfo"></p>
+                    </div>
+                )
+            },
+            onClick: function(){
+                var city = $("#searchbox").val();
+                console.log('this is the text:'+city);
+                var api = 'http://api.openweathermap.org/data/2.5/weather?q='+city+'&appid=5e4238139e471d1f84c2d0977305e489';
+                document.getElementById("winfo").innerHTML = city.weather[0].description;
+                document.getElementById("tinfo").innerHTML = city.main.temp;
+/*                $.getJSON(api, function(city){
+                    var weatherDescription = city.weather[0].description;
+                    var weatherTemperature = city.main.temp;
+                    console.log(weatherDescription);
+                    console.log(weatherTemperature);
+                });*/
+            }
+        });
+    </script>
     <div id="content"style="position:absolute;top:55%;width:50%;left:25%;right:25%">
         <div id="left">
             <button id="newsbutton">News</button>
