@@ -53,7 +53,7 @@ function erase(){
 
 }
 
-$(window ).on("load", function() {
+$(window ).load(function() {
     $("#drawbutton").click(draw);
     $("#erasebutton").click(erase);    
 });

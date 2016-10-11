@@ -14,6 +14,26 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
     <!-- ReactFire -->
     <script src="https://cdn.firebase.com/libs/reactfire/1.0.0/reactfire.min.js"></script>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+    <style>
+    .axis path,
+    .axis line {
+      fill: none;
+      stroke: #000;
+      shape-rendering: crispEdges;
+    }
+
+    .x.axis path {
+      display: none;
+    }
+
+    .line {
+      fill: none;
+      stroke: steelblue;
+      stroke-width: 1.5px;
+    }
+    </style>
     <script>
         "use strict";
         // Initialize Firebase
@@ -56,20 +76,104 @@
             });
             return pwd;
         }
-        function getWeather(location){
+        function visuallize(data){
+            var margin = {top: 40, right: 20, bottom: 30, left: 40},
+            width = 960 - margin.left - margin.right,
+            height = 500 - margin.top - margin.bottom;
+
+
+            var x = d3.scale.ordinal()
+                .rangeRoundBands([0, width], .1);
+
+            var y = d3.scale.linear()
+                .range([height, 0]);
+
+            var xAxis = d3.svg.axis()
+                .scale(x)
+                .orient("bottom");
+
+            var yAxis = d3.svg.axis()
+                .scale(y)
+                .orient("left");
+
+            var tip = d3.tip()
+              .attr('class', 'd3-tip')
+              .offset([-10, 0])
+              .html(function(d) {
+                return "<strong>Temperature:</strong> <span style='color:red'>" + d.temp + "</span>";
+              })
+
+            var svg = d3.select("#visual").append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+              .append("g")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+            svg.call(tip);
+
+              x.domain(data.map(function(d) { return d.date; }));
+              y.domain([0, d3.max(data, function(d) { return d.temp; })]);
+
+              svg.append("g")
+                  .attr("class", "x axis")
+                  .attr("transform", "translate(0," + height + ")")
+                  .call(xAxis);
+
+              svg.append("g")
+                  .attr("class", "y axis")
+                  .call(yAxis)
+                .append("text")
+                  .attr("transform", "rotate(-90)")
+                  .attr("y", 6)
+                  .attr("dy", ".71em")
+                  .style("text-anchor", "end")
+                  .text("Temperature");
+
+              svg.selectAll(".bar")
+                  .data(data)
+                .enter().append("rect")
+                  .attr("class", "bar")
+                  .attr("x", function(d) { return x(d.date); })
+                  .attr("width", x.rangeBand())
+                  .attr("y", function(d) { return y(d.temp); })
+                  .attr("height", function(d) { return height - y(d.temp); })
+                  .on('mouseover', tip.show)
+                  .on('mouseout', tip.hide)
+        }
+        function getData(JSONfile)
+        {
             console.log("here");
+            console.log(JSONfile);
+            var data=[];
+            var i;
+            for (i in JSONfile){
+                var date=JSONfile[i].date.weekday_short+" "+JSONfile[i].date.monthname_short+"/"+JSONfile[i].date.day; //Tues Oct/11
+                var temperature= JSONfile[i].high.fahrenheit;
+                var out={date : date, temp: temperature};
+                data.push(out);
+            }
+            visuallize(data);
+        }
+        function getWeather(location){
+            //console.log("here");
             var con= "http://api.wunderground.com/api/b40fe05c89327f5c/conditions/q/";
             var url= con + location + ".json";
-            console.log(url);
+            //console.log(url);
             var weather = new XMLHttpRequest();
             weather.open("GET", url, false);
             weather.send(null);
 
             var response= JSON.parse(weather.response).current_observation;
             var location= response.display_location.full;
-            var temp= response.temp_f +"F";
-
-            $("#newSpace").text(location+" is "+temp);
+            var temp= response.temp_f +" F";
+            var future="http://api.wunderground.com/api/b40fe05c89327f5c/forecast10day/q/";
+            var url= future+location+".json";
+            var forecast = new XMLHttpRequest();
+            forecast.open("GET", url, false);
+            forecast.send(null);
+            var data=JSON.parse(forecast.response).forecast.simpleforecast.forecastday;
+            getData(data);
+            $("#newSpace").text(location+" is currently "+temp);
         }
     </script>
 </head>
@@ -80,14 +184,13 @@
             <b><a href="index.html" title="Back">&#x21da GO BACK</a></b>
             <div style="float:right;width:30%;overflow:hidden;height:44px">How's the weather?</div>
             </div>
-        <div style="float:right;width:20%;overflow:hidden;height:44px;">
-            <input type="text" placeholder="Search for location ..." required id="searchbox">
-            <input type="button" value="Search" id="searchbutton">
-        </div>
+        <div id="staticholder"></div>
     </div>
     
     <div id="newControl"></div>
     <div id="newSpace"></div>
+    <div id="visual"></div>
+    
     
     <p>next <a href="randompage.html" style="color:blue;">page</a>-Chuck</p>
     <div id="choices">
@@ -130,6 +233,8 @@
     <p><a href="index.html">Back</a></p>
     <div id="test"></div>
     <footer id="footer">You haven't signed in!</footer>
+    
+    
     <script type="text/babel">
         var LoginStuff= React.createClass({
             render: function(){

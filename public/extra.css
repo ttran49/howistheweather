@@ -1,6 +1,8 @@
+
 body {
     background-color: gainsboro;
     height: 100%;
+    font: 10px sans-serif;
 }
 td {
     color: #744843;
