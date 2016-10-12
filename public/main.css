@@ -22,13 +22,13 @@ body {
     justify-content: center;
     padding:3px 10px;
     color: black;
-    width:100%;/* was width:100vw;*/
+    width:100vw;
 }
 #searchbox {
     padding:3px 10px;
     color: black;/*was transparent*/
     display:table-cell;
-    width:100vw;
+    width:100%;
 }
 #searchSpan {
     position:absolute;
