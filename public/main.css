@@ -31,8 +31,17 @@ body {
     display:table-cell;
     width:100vw;
 }
+#searchSpan {
+    position:absolute;
+    top: 50%;
+    width: 50%;
+    left: 25%;
+    right: 25%;
+    height: auto;
+}
 #searchbutton {
     height: 25px;/*Searchbox's padding makes it a bit bigger, this just makes them even*/
+    float: right;
     border:2px solid #207cca;
     background-color:#207cca;
     color:#fafafa;
