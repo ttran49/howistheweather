@@ -17,8 +17,8 @@ body {
     text-align: center;
 }
 #searchbar {
-    /*display: inline-block;*/
-    display:table-cell;
+    display: inline-block;
+    /*display:table-cell;*/
     justify-content: center;
     padding:3px 10px;
     color: black;
