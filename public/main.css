@@ -32,7 +32,7 @@ body {
     padding:3px 10px;
     color: black;/*was transparent*/
     display:table-cell;
-    width:80%;/*modified to allow the Searchbutton*/
+    width:100%;/*modified to allow the Searchbutton*/
 }
 #searchSpan {
     position:absolute;
