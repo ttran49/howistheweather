@@ -153,8 +153,17 @@
                 data.push(out);
             }
             visuallize(data);
-        }
+	}
         function getWeather(location){
+	    /* This throws an error! apparently wunderground needs city name & state. 
+	    If it doesn't get a state, it brings us a page that lists off all cities
+	    with that name, around the world, not the weather. (for example put in this URL:
+	    http://api.wunderground.com/api/b40fe05c89327f5c/conditions/q/fairfax.json
+	    http://api.wunderground.com/api/b40fe05c89327f5c/conditions/q/va/fairfax.json).
+	    The page displays the cities in an array called "results" which is not included
+	    in the weather page we want. When we run this, how about we first try asking if 
+	    results is not empty. If it is empty, return the weather like normal. If not,
+	    display the states or countries that are listed in results in a dropdown menu.*/
             //console.log("here");
             var con= "http://api.wunderground.com/api/b40fe05c89327f5c/conditions/q/";
             var url= con + location + ".json";
