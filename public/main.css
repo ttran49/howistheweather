@@ -28,7 +28,7 @@ body {
     padding:3px 10px;
     color: black;/*was transparent*/
     display:table-cell;
-    width:88%;
+    width:85%;/*modified to allow the Searchbutton*/
 }
 #searchSpan {
     position:absolute;
@@ -44,6 +44,7 @@ body {
     border:2px solid #207cca;
     background-color:#207cca;
     color:#fafafa;
+    width:15%;
 }
 #searchbutton:hover  {
     background-color:#fafafa;
