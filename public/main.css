@@ -24,6 +24,10 @@ body {
     color: black;
     width:100vw;
 }
+#searchboxf{
+    width: 85%;
+    float:left;
+}
 #searchbox {
     padding:3px 10px;
     color: black;/*was transparent*/
