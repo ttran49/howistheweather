@@ -28,7 +28,7 @@ body {
     padding:3px 10px;
     color: black;/*was transparent*/
     display:table-cell;
-    width:90%;
+    width:88%;
 }
 #searchSpan {
     position:absolute;
