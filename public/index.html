@@ -55,13 +55,15 @@
             },
             onClick: function(){
                 var searchboxText= $("#searchbox").val();
-                 ReactDOM.render(<Search />, document.getElementById('searchresultholder'));
+                ReactDOM.render(<Search />, document.getElementById('searchresultholder'));
             }
         });
         var Search = React.createClass({
             render: function(){
                 return(
                     <div id="weatherDisplay">
+                        <p>Location:</p>
+                        <p id="ninfo"></p>
                         <p>The current weather is: </p>
                         <p id="winfo"></p>
                         <p>Current Temperature:</p>
@@ -72,12 +74,14 @@
             componentWillMount: function(){
                 var city = $("#searchbox").val();
                 console.log('this is the text:'+city);
-                var api = 'https://api.openweathermap.org/data/2.5/weather?q='+city+'&appid=5e4238139e471d1f84c2d0977305e489';
+                
+                var api = 'http://api.wunderground.com/api/b40fe05c89327f5c/conditions/q/'+city+'.json';
                 $.getJSON(api, function(dataReturnedFromAJAXCall){
                     var weatherDescription = dataReturnedFromAJAXCall.weather[0].description;
                     var weatherTemperature = dataReturnedFromAJAXCall.main.temp;
                     console.log(weatherDescription);
                     console.log(weatherTemperature);
+                    
                 });
             }
         });
