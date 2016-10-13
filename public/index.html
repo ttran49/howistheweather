@@ -75,10 +75,12 @@
                 var city = $("#searchbox").val();
                 console.log('this is the text:'+city);
                 
-                var api = 'http://api.wunderground.com/api/b40fe05c89327f5c/conditions/q/'+city+'.json';
+                var apip = 'http://api.wunderground.com/api/b40fe05c89327f5c/conditions/q/'+city+'.json';
+                var api = 'http://api.wunderground.com/api/b40fe05c89327f5c/conditions/q/va/fairfax.json';
                 $.getJSON(api, function(dataReturnedFromAJAXCall){
-                    var weatherDescription = dataReturnedFromAJAXCall.weather[0].description;
-                    var weatherTemperature = dataReturnedFromAJAXCall.main.temp;
+                    
+                    var weatherDescription = dataReturnedFromAJAXCall.current_observation.weather;
+                    var weatherTemperature = dataReturnedFromAJAXCall.current_observation.temp_f;
                     console.log(weatherDescription);
                     console.log(weatherTemperature);
                     
