@@ -77,15 +77,18 @@
                 console.log('this is the text:'+city);
                 
                 var apip = 'http://api.wunderground.com/api/b40fe05c89327f5c/conditions/q/'+city+'.json';
-                var api = 'http://api.wunderground.com/api/b40fe05c89327f5c/conditions/q/va/fairfax.json';
-                $.getJSON(api, function(dataReturnedFromAJAXCall){
-                    
-                    var weatherDescription = dataReturnedFromAJAXCall.current_observation.weather;
-                    var weatherTemperature = dataReturnedFromAJAXCall.current_observation.temp_f;
-                    console.log(weatherDescription);
-                    console.log(weatherTemperature);
-                    
-                });
+                var url = 'http://api.wunderground.com/api/b40fe05c89327f5c/conditions/q/va/fairfax.json';
+                
+                var weather = new XMLHttpRequest();
+                weather.open("GET", url, false);
+                weather.send(null);
+                var response = JSON.parse(weather.response).current_observation;
+                var location = response.display_location.full;
+                var temp = response.temp_f + " F";
+                console.log("This is the Location: "+location);
+                console.log("This is the Temp: "+temp);
+                
+                
             }
         });
         ReactDOM.render(<SearchStuff />, document.getElementById('searchbuttonholder'));
