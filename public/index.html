@@ -79,10 +79,16 @@
                 var apip = 'http://api.wunderground.com/api/b40fe05c89327f5c/conditions/q/'+city+'.json';
                 var url = 'http://api.wunderground.com/api/b40fe05c89327f5c/conditions/q/va/fairfax.json';
                 
+                console.log('check1');
+                
                 var weather = new XMLHttpRequest();
+                console.log('check2');
                 weather.open("GET", url, false);
+                console.log('check3');
                 weather.send(null);
+                console.log('check4');
                 var response = JSON.parse(weather.response).current_observation;
+                console.log('check5');
                 var location = response.display_location.full;
                 var temp = response.temp_f + " F";
                 console.log("This is the Location: "+location);
@@ -145,6 +151,6 @@
     <div id="help"type="text"style="top:60%;left:25%;right:25%;display:none">
         <p>Some kind of help will go here!</p>
     </div>
-        <footer> Created by Chuck and Nick(updated at 9:30PM)</footer>
+        <footer> Created by Chuck and Nick(updated at 9:56PM)</footer>
     </body>
 </html>
