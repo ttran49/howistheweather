@@ -76,25 +76,43 @@
                 var city = $("#searchbox").val();
                 console.log('this is the text:'+city);
                 
-                var apip = 'http://api.wunderground.com/api/b40fe05c89327f5c/conditions/q/'+city+'.json';
-                var url = 'http://api.wunderground.com/api/b40fe05c89327f5c/conditions/q/va/fairfax.json';
-                
-                console.log('check1');
+                var url = 'http://api.wunderground.com/api/b40fe05c89327f5c/conditions/q/'+city+'.json';
                 
                 var weather = new XMLHttpRequest();
-                console.log('check2');
                 weather.open("GET", url, false);
-                console.log('check3');
                 weather.send(null);
-                console.log('check4');
-                var response = JSON.parse(weather.response).current_observation;
-                console.log('check5');
-                var location = response.display_location.full;
-                var temp = response.temp_f + " F";
+                var r = JSON.parse(weather.response);
+                var location;
+                var temp;
+                var w;
+                // If the city is not completely defined, "results" will exist
+                if(r.results[0] != null){
+                    // for now lets just return the first one
+                    var s = r.results[0].state;
+                    var url2 = 'http://api.wunderground.com/api/b40fe05c89327f5c/conditions/q/'+s+'/'+city+'.json';
+                    var weather2 = newXMLHttpRequest();
+                    weather2.open("GET", url2, false);
+                    weather2.send(null);
+                    var response = JSON.parse(weather2.response).current_observation;
+                    location = response.display_location.full;
+                    temp = response.temp_f + " F";
+                    w = response.weather;
+                }
+                else{
+                    //This assumes we have the right json page up, just get the stuff you need and display it
+                    location = r.current_observation.display_location.full;
+                    temp = r.current_observation.temp_f + " F";
+                    w = r.current_observation.weather;
+                }
+                //var response = JSON.parse(weather.response).current_observation;
+                //var location = response.display_location.full;
+                //var temp = response.temp_f + " F";
                 console.log("This is the Location: "+location);
                 console.log("This is the Temp: "+temp);
-                
-                
+                console.log("This is the Weather: "+w);
+                document.getElementById("ninfo").innerHTML = location;
+                document.getElementById("winfo").innerHTML = w;
+                document.getElementById("tinfo").innerHTML = temp;
             }
         });
         ReactDOM.render(<SearchStuff />, document.getElementById('searchbuttonholder'));
