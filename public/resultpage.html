@@ -169,7 +169,7 @@
             var url= con + location + ".json";
             //console.log(url);
             var weather = new XMLHttpRequest();
-            weather.open("GET", url, false);
+            weather.open("GET", url, true);
             weather.send(null);
 
             var response= JSON.parse(weather.response).current_observation;
