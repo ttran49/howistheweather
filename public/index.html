@@ -79,9 +79,12 @@
                 var url = 'http://api.wunderground.com/api/b40fe05c89327f5c/conditions/q/'+city+'.json';
                 
                 var weather = new XMLHttpRequest();
+                console.log('test1');
                 weather.open("GET", url, false);
                 weather.send(null);
+                console.log('test2');
                 var r = JSON.parse(weather.response);
+                console.log('test3');
                 var location;
                 var temp;
                 var w;
