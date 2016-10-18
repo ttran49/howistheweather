@@ -38,10 +38,8 @@
             <a href="resultpage.html"> next page </a>
     </div>
     <!- content, where the weather thing would be>
-    <div id="searchbuttonholder">
-        </div>
-        <div id="searchresultholder">
-        </div>
+    <div id="searchbuttonholder"></div>
+    <div id="searchresultholder"></div>
     
     <script type="text/babel">
         var SearchStuff = React.createClass({
@@ -124,9 +122,23 @@
         });
         ReactDOM.render(<SearchStuff />, document.getElementById('searchbuttonholder'));
         
-        describe("SearchStuff", function(){
-            it("Does something", function(){
-                expect(1).equal(1);
+        describe("SearchStuff", function() {
+            var in_text = $("#searchbox").val();
+            it("sends text", function() {
+                spyOn(searchboxText,"Search").and.callFake(function()
+                {
+                    
+                });
+                expect(searchboxText).toEqual(in_text);
+            });
+            describe("Search", function() {
+                it("recieves text", function() {
+                    expect(city).toEqual(in_text);
+                });
+                spyOn(,"weather.open").and.callFake(function()
+                {
+                    
+                });
             });
         });
     </script>
