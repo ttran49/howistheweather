@@ -138,12 +138,12 @@
                 // location, w, and temp.
                 var location = "Fairfax,test";
                 var w = "sunny,test";
-                var temp = "95,test";
+                var temp = "85,test";
                 document.getElementById("ninfo").innerHTML = location;
                 document.getElementById("winfo").innerHTML = w;
                 document.getElementById("tinfo").innerHTML = temp;
             });
-            // Skipping this because it's easier to do the above part
+            // Skipping this because it's easier to do one big spy for all of "componentWillMount"
             xdescribe("Search", function() {
                 it("recieves text", function() {
                     expect(city).toEqual(in_text);
