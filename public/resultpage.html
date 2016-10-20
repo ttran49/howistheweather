@@ -114,10 +114,10 @@
         };
         firebase.initializeApp(config);
         var dataref= firebase.database().ref("Auth");
-        function register(username, email, pwd){
+        var newObj = {};
+        newObj.signUp= function(username, email, pwd){
             dataref.child(username).set({email: email, password: pwd});
         }
-        var newObj = {};
         newObj.signIn = function (username, pwd){
             return firebase.database().ref('/Auth/' + username).once('value').then(function(snapshot) {
               if(snapshot.val().password.localeCompare(pwd)==0){
@@ -145,7 +145,7 @@
             });
             return pwd;
         }
-        function visuallize(data){
+         newObj.visuallize=function (data){
             var margin = {top: 40, right: 20, bottom: 30, left: 40},
             width = 960 - margin.left - margin.right,
             height = 500 - margin.top - margin.bottom;
@@ -209,7 +209,7 @@
                   .on('mouseover', tip.show)
                   .on('mouseout', tip.hide)
         }
-        function getData(JSONfile)
+        newObj.getData= function (JSONfile)
         {
             console.log("here");
             console.log(JSONfile);
@@ -221,9 +221,9 @@
                 var out={date : date, temp: temperature};
                 data.push(out);
             }
-            visuallize(data);
+             newObj.visuallize(data);
         }
-        function getWeather(location){
+        newObj.getWeather= function (location){
             //console.log("here");
             var con= "http://api.wunderground.com/api/b40fe05c89327f5c/conditions/q/";
             var url= con + location + ".json";
@@ -241,7 +241,7 @@
             forecast.open("GET", url, false);
             forecast.send(null);
             var data=JSON.parse(forecast.response).forecast.simpleforecast.forecastday;
-            getData(data);
+            newObj.getData(data);
             $("#newSpace").text(location+" is currently "+temp);
         }
         var LoginStuff= React.createClass({
@@ -275,15 +275,15 @@
                     <div>
                             <div>
                                 <label>Enter Username:</label>
-                                <input id="registerUsr" type="text" placeholder="Enter username"></input>
+                                <input ref="user" id="registerUsr" type="text" placeholder="Enter username"></input>
                             </div>
                             <div>
                                 <label>Enter Email:</label>
-                                <input id="registerEmail" type="email" placeholder="Enter email"></input>
+                                <input ref="email" id="registerEmail" type="email" placeholder="Enter email"></input>
                             </div>
                             <div>
                                 <label>Enter Password:</label>
-                                <input id="registerPwd" type="password" placeholder="Enter password"></input>
+                                <input ref="pwd" id="registerPwd" type="password" placeholder="Enter password"></input>
                             </div>
                             <button id="registerBut" onClick={this.onClick}>Register</button>
                     </div>
@@ -293,7 +293,7 @@
                 var username=$("#registerUsr").val();
                 var email=$("#registerEmail").val();
                 var pwd=$("#registerPwd").val();
-                register(username, email, pwd);
+                newObj.signUp(username, email, pwd);
             }
         });
         var ForgotStuff = React.createClass({
@@ -302,7 +302,7 @@
                     <div>
                             <div>
                                 <label>Enter Username:</label>
-                                <input id="registerUsr" type="text" placeholder="Enter username"></input>
+                                <input ref="user" id="registerUsr" type="text" placeholder="Enter username"></input>
                             </div>
                             <button id="registerBut" onClick={this.onClick}>Go!</button>
                     </div>
@@ -375,7 +375,7 @@
                     <div>
                         <div>
                             <label>Enter A Location:</label>
-                            <input id="searchLocation" type="text" placeholder="Enter a location" />
+                            <input ref="input "id="searchLocation" type="text" placeholder="Enter a location" />
                         </div>
                         <button id="shownew" onClick={this.onClick}>Weather!</button>
                     </div>
@@ -384,7 +384,7 @@
             onClick: function(){
                 var location= $("#searchLocation").val();
                 console.log(location);
-                getWeather(location);
+                newObj.getWeather(location);
             }
         });
         ReactDOM.render(<Register />, document.getElementById('button1'));
@@ -440,7 +440,122 @@
                 });
                        
             });
-        });
+            describe("TEsting register stuff", function (){
+                var TestUtils = React.addons.TestUtils;
+                var component, element;
+                describe("test Login", function(){
+                    beforeEach(function(){
+                         element = React.createElement(Register);
+                         component = TestUtils.renderIntoDocument(element);
+                    });
+                    it("should not shoud all the register stuff at the beginning", function(){
+                        expect(component.state.show).toEqual(false);
+                    });
+                    it("should show after click", function(){
+                        let buttonz = TestUtils.scryRenderedDOMComponentsWithTag(component, "button")[0];
+                        //console.log(buttonz);
+                        TestUtils.Simulate.click(buttonz);
+                        expect(component.state.show).toEqual(true);
+                    });
+               });
+                describe("testing Register sending/", function(){
+                    var TestUtils = React.addons.TestUtils;
+                    var component, element;
+                    describe("test Login", function(){
+                        beforeEach(function(){
+                             element = React.createElement(RegisterStuff);
+                             component = TestUtils.renderIntoDocument(element);
+                        });
+                        it("should call register with username, pwd, email", function(){
+                            var user= component.refs.user;
+                            user.value= 'test6';
+                            var pwd=component.refs.pwd;
+                            pwd.value='123';
+                            var email=component.refs.email;
+                            pwd.value='test6@email.com';
+
+                            //input data
+                            TestUtils.Simulate.change(user);
+                            TestUtils.Simulate.change(pwd);
+                            TestUtils.Simulate.change(email);
+
+                            //simulate
+                             var spy=spyOn(newObj, "signUp");
+                            //click submit
+                            let buttonz = TestUtils.scryRenderedDOMComponentsWithTag(component, "button")[0];
+                            TestUtils.Simulate.click(buttonz);
+                            expect(spy).toHaveBeenCalledWith('test6','test6@email.com','123');
+                            });
+                        });
+                });
+            });
+            describe("Forgot stuff", function(){
+                var TestUtils = React.addons.TestUtils;
+                var component, element;
+                describe("test Forgot", function(){
+                    beforeEach(function(){
+                         element = React.createElement(Forgot);
+                         component = TestUtils.renderIntoDocument(element);
+                    });
+                    it("should not shoud all the registforgoter stuff at the beginning", function(){
+                        expect(component.state.show).toEqual(false);
+                    });
+                    it("should show after click", function(){
+                        let buttonz = TestUtils.scryRenderedDOMComponentsWithTag(component, "button")[0];
+                        //console.log(buttonz);
+                        TestUtils.Simulate.click(buttonz);
+                        expect(component.state.show).toEqual(true);
+                    });
+               });
+                describe("Testing Forgot data send", function(){
+                    var TestUtils = React.addons.TestUtils;
+                    var component, element;
+                    describe("test Forgot", function(){
+                        beforeEach(function(){
+                             element = React.createElement(ForgotStuff);
+                             component = TestUtils.renderIntoDocument(element);
+                        });
+                    it("Should call forgot funciton with user name", function(){
+                            console.log(component);
+                            var user= component.refs.user;
+                            user.value= 'test6';
+                        
+                            //input data
+                            TestUtils.Simulate.change(user);
+
+                            //simulate
+                             var spy=spyOn(newObj, "forgotpwd");
+                            //click submit
+                            let buttonz = TestUtils.scryRenderedDOMComponentsWithTag(component, "button")[0];
+                            TestUtils.Simulate.click(buttonz);
+                            expect(spy).toHaveBeenCalledWith('test6');
+                            });
+                        });
+                    });
+                });
+                describe("Testing weather", function(){
+                    var TestUtils = React.addons.TestUtils;
+                    var component, element;
+                    beforeEach(function(){
+                         element = React.createElement(Weather);
+                         component = TestUtils.renderIntoDocument(element);
+                        });
+                    it("Should call forgot funciton with user name", function(){
+                            var input= component.refs.input;
+                            user.value= '22042';
+                        
+                            //input data
+                            TestUtils.Simulate.change(input);
+
+                            //simulate
+                             var spy=spyOn(newObj, "getWeather");
+                            //click submit
+                            let buttonz = TestUtils.scryRenderedDOMComponentsWithTag(component, "button")[0];
+                            TestUtils.Simulate.click(buttonz);
+                            expect(spy).toHaveBeenCalledWith('22042');
+                            });
+                });
+            });
     </script>
 </body>
 </html>
