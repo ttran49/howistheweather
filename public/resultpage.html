@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,7 +43,66 @@
       stroke-width: 1.5px;
     }
     </style>
-    <script>
+</head>
+<body>
+    <! the static bar at the top>
+    <div id="actionbar" style="overflow:auto; background-image: url(https://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg);">
+        <div style="float:left;width:60%;overflow:hidden;height:44px">
+            <b><a href="index.html" title="Back">&#x21da GO BACK</a></b>
+            <div style="float:right;width:30%;overflow:hidden;height:44px">How's the weather?</div>
+            </div>
+        <div id="staticholder"></div>
+    </div>
+    
+    <div id="newControl"></div>
+    <div id="newSpace"></div>
+    <div id="visual"></div>
+    
+    
+    <p>next <a href="randompage.html" style="color:blue;">page</a>-Chuck</p>
+    <div id="choices">
+        <span>
+            <button onclick="hide_and_show('catvideo','dogvideo');">DOG video</button>
+             or
+        </span>
+        <span>
+            <button onclick="hide_and_show('dogvideo','catvideo');">CAT video</button>
+        </span>
+        <span>
+            <button onclick="hide_all('catvideo','dogvideo');"> Reset!</button>
+        </span>
+    </div>
+    
+    <div id="catvideo">
+    <p>Also here is a <b>cat</b> video and you can't fast forward :)</p>
+    <iframe width="900" height="506" src="https://www.youtube-nocookie.com/embed/G8KpPw303PY?controls=0" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <div id="dogvideo">
+        <p>Also here is a <b>dog</b> video and you can't fast forward :)</p>
+        <iframe width="900" height="506" src="https://www.youtube-nocookie.com/embed/GF60Iuh643I?controls=0" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <div id="choices">
+        <span><button id="drawbutton">Draw something</button></span>
+        <span><button id="erasebutton">Erase!</button></span>
+        <div id="drawspace">
+           
+        </div>
+    </div>
+    <div>
+        <div id="buttons">
+            <span id="button1"></span>
+            <span id="button2"></span>
+            <span id = "button3"></span>
+        </div>
+        <div id="login"></div>
+        <div id="registration"></div>
+    </div>
+    <p><a href="index.html">Back</a></p>
+    <div id="test"></div>
+    <footer id="footer">You haven't signed in!</footer>
+    
+    
+    <script type="text/babel">
         "use strict";
         // Initialize Firebase
         var config = {
@@ -57,7 +117,8 @@
         function register(username, email, pwd){
             dataref.child(username).set({email: email, password: pwd});
         }
-        function login (username, pwd){
+        var newObj = {};
+        newObj.signIn = function (username, pwd){
             return firebase.database().ref('/Auth/' + username).once('value').then(function(snapshot) {
               if(snapshot.val().password.localeCompare(pwd)==0){
                 //successfully log in. do something
@@ -73,7 +134,7 @@
                 return false;
             });
         }
-        function forgotpwd(username){
+        newObj.forgotpwd=function (username){
             var pwd=null;
             firebase.database().ref('Auth/' + username).once('value').then(function(snapshot){
                 console.log("here");
@@ -183,67 +244,6 @@
             getData(data);
             $("#newSpace").text(location+" is currently "+temp);
         }
-    </script>
-</head>
-<body>
-    <! the static bar at the top>
-    <div id="actionbar" style="overflow:auto; background-image: url(https://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg);">
-        <div style="float:left;width:60%;overflow:hidden;height:44px">
-            <b><a href="index.html" title="Back">&#x21da GO BACK</a></b>
-            <div style="float:right;width:30%;overflow:hidden;height:44px">How's the weather?</div>
-            </div>
-        <div id="staticholder"></div>
-    </div>
-    
-    <div id="newControl"></div>
-    <div id="newSpace"></div>
-    <div id="visual"></div>
-    
-    
-    <p>next <a href="randompage.html" style="color:blue;">page</a>-Chuck</p>
-    <div id="choices">
-        <span>
-            <button onclick="hide_and_show('catvideo','dogvideo');">DOG video</button>
-             or
-        </span>
-        <span>
-            <button onclick="hide_and_show('dogvideo','catvideo');">CAT video</button>
-        </span>
-        <span>
-            <button onclick="hide_all('catvideo','dogvideo');"> Reset!</button>
-        </span>
-    </div>
-    
-    <div id="catvideo">
-    <p>Also here is a <b>cat</b> video and you can't fast forward :)</p>
-    <iframe width="900" height="506" src="https://www.youtube-nocookie.com/embed/G8KpPw303PY?controls=0" frameborder="0" allowfullscreen></iframe>
-    </div>
-    <div id="dogvideo">
-        <p>Also here is a <b>dog</b> video and you can't fast forward :)</p>
-        <iframe width="900" height="506" src="https://www.youtube-nocookie.com/embed/GF60Iuh643I?controls=0" frameborder="0" allowfullscreen></iframe>
-    </div>
-    <div id="choices">
-        <span><button id="drawbutton">Draw something</button></span>
-        <span><button id="erasebutton">Erase!</button></span>
-        <div id="drawspace">
-           
-        </div>
-    </div>
-    <div>
-        <div id="buttons">
-            <span id="button1"></span>
-            <span id="button2"></span>
-            <span id = "button3"></span>
-        </div>
-        <div id="login"></div>
-        <div id="registration"></div>
-    </div>
-    <p><a href="index.html">Back</a></p>
-    <div id="test"></div>
-    <footer id="footer">You haven't signed in!</footer>
-    
-    
-    <script type="text/babel">
         var LoginStuff= React.createClass({
             render: function(){
                 return(
@@ -263,7 +263,7 @@
             onClick: function(){
                 var username=$("#loginUsr").val();
                 var pwd=$("#loginPwd").val();
-                if(login(username,pwd))
+                if(newObj.signIn(username,pwd))
                     document.getElementById("footer").innerHTML="YOU HAVE LOGGED IN AS " + username;
                 else
                     alert("Wrong username/password!");
@@ -310,7 +310,7 @@
             },
             onClick: function(){
                 var username=$("#registerUsr").val();
-                var pwd=forgotpwd(username);
+                var pwd=newObj.forgotpwd(username);
                 if (pwd != null){
                     console.log(pwd);
                     alert("Your password is " + pwd);
@@ -422,18 +422,20 @@
                          component = TestUtils.renderIntoDocument(element);
                      });
                     it("Testing enter input and call the correct function", function(){
-                        var user= this.refs.user;
+                        var user= component.refs.user;
                         user.value= 'test1';
-                        var pwd=this.refs.pwd;
+                        var pwd=component.refs.pwd;
                         pwd.value='123';
+                        
                         TestUtils.Simulate.change(user);
                         TestUtils.Simulate.change(pwd);
                         
-                        //set spy
-                        spyOn(component, 'login');
+                        var spy=spyOn(newObj, "signIn");
                         //click submit
                         let buttonz = TestUtils.scryRenderedDOMComponentsWithTag(component, "button")[0];
-                        console.log(buttonz);
+                        TestUtils.Simulate.click(buttonz);
+                        expect(spy).toHaveBeenCalledWith('test1','123');
+                        
                     });
                 });
                        
