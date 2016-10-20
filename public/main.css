@@ -24,15 +24,12 @@ body {
     color: black;
     width:100vw;
 }
-#searchboxf{
-    width: 85%;
-    float:left;
-}
 #searchbox {
     padding:3px 10px;
     color: black;/*was transparent*/
     display:table-cell;
-    width:100%;/*modified to allow the Searchbutton*/
+    width:80%;/*modified to allow the Searchbutton*/
+    float:left;
 }
 #searchSpan {
     position:absolute;
