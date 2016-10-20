@@ -48,7 +48,7 @@
                     <div id="searchbar">
                         <div>
                             <span id="searchSpan">
-                                <input type="text" placeholder="Search for location..." required id="searchbox" />
+                                <input ref ="input" type="text" placeholder="Search for location..." required id="searchbox" />
                                 <button id="searchbutton" onClick={this.onClick}> Search!</button>
                             </span>
                         </div>
@@ -124,14 +124,23 @@
         ReactDOM.render(<SearchStuff />, document.getElementById('searchbuttonholder'));
         
         describe("SearchStuff", function() {
-            var in_text = $("#searchbox").val();
+            var TestUtils = React.addons.TestUtils;
+            var component, element;
+            beforeEach(function(){
+                element = React.createElement(SearchStuff);
+                component = React.addons.TestUtils.renderIntoDocument(element);
+                var s_box = component.refs.input;
+                s_box.value = 'Fairfax,test';
+            });
             it("sends text", function() {
-                expect(searchboxText).toEqual(in_text);
+                let button = TestUtils.findRenderedDOMComponentWithTag(SearchStuff, "searchbutton");
+                expect(TestUtils.Simulate.click(button)).toThrow();
             });
             it("creates the Searchbar", function() {
                 let s_bar = React.addons.TestUtils.findRenderedDOMComponentWithTag(component,"searchbar");
                 excect(s_bar).not.toBeUndefined();
             });
+            ReactDOM.render(<Search />, document.getElementById('searchresultholder'));
             spyOn(Search, "componentWillMount").and.callFake(function()
             {
                 // For now, I basically have to replace all of Search, because the XMLHttpRequest doesn't work,
