@@ -27,7 +27,7 @@ body {
 #searchbox {
     padding:3px 10px;
     color: black;/*was transparent*/
-    display:table-cell;
+    /*display:table-cell;*/
     width:80%;/*modified to allow the Searchbutton*/
     float:left;
 }
