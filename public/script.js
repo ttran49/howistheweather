@@ -55,14 +55,7 @@ function erase(){
 
 $(window ).load(function() {
     $("#drawbutton").click(draw);
-    $("#erasebutton").click(erase);
-	$("#loginPrompt").click(function(){
-		hide_and_show("registration","login")
-	});
-	$("#registerPrompt").click(function(){
-		hide_and_show("login","registration")
-	});
-    
+    $("#erasebutton").click(erase);    
 });
 $(window).on("hashchange", function (){
 //console.log(location.hash);
