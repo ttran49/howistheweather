@@ -1,0 +1,22 @@
+{
+  "name": "howistheweather",
+  "version": "1.0.0",
+  "description": "Scenarios:\r   Login:\r     Users can login with a registered username and password.\r   Regisration:\r     Users can register themselves with a username, email, and a password.\r   Search:\r     Users can search for weather information for a given city via search bar.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ttran49/howistheweather.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ttran49/howistheweather/issues"
+  },
+  "homepage": "https://github.com/ttran49/howistheweather#readme",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}
