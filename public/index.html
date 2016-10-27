@@ -17,10 +17,11 @@
     <!-- ReactFire -->
     <script src="https://cdn.firebase.com/libs/reactfire/1.0.0/reactfire.min.js"></script>
     <!--Jasmine-->
-    <link rel="stylesheet" type="text/css" href="../jasmine/lib/jasmine-2.5.2/jasmine.css">
-    <script type="text/javascript" src="../jasmine/lib/jasmine-2.5.2/jasmine.js"></script>
-    <script type="text/javascript" src="../jasmine/lib/jasmine-2.5.2/jasmine-html.js"></script>
-    <script type="text/javascript" src="../jasmine/lib/jasmine-2.5.2/boot.js"></script>
+    <link rel="shortcut icon" type="image/png" href="jasmine/lib/jasmine-2.5.2/jasmine_favicon.png">
+    <link rel="stylesheet" type="text/css" href="jasmine/lib/jasmine-2.5.2/jasmine.css">
+    <script type="text/javascript" src="jasmine/lib/jasmine-2.5.2/jasmine.js"></script>
+    <script type="text/javascript" src="jasmine/lib/jasmine-2.5.2/jasmine-html.js"></script>
+    <script type="text/javascript" src="jasmine/lib/jasmine-2.5.2/boot.js"></script>
     
 </head>
     <body>
@@ -48,8 +49,10 @@
                     <div id="searchbar">
                         <div>
                             <span id="searchSpan">
+                                
                                 <input ref ="input" type="text" placeholder="Search for location..." required id="searchbox" />
                                 <button id="searchbutton" onClick={this.onClick}> Search!</button>
+                                
                             </span>
                         </div>
                     </div>
@@ -57,6 +60,11 @@
             },
             onClick: function(){
                 var searchboxText= $("#searchbox").val();
+                $.ajax({
+                    
+                    method: "GET",
+                    data: {"location": searchboxText}
+                });
                 ReactDOM.render(<Search />, document.getElementById('searchresultholder'));
             }
         });
@@ -74,6 +82,10 @@
                 )
             },
             componentWillMount: function(){
+                $.get({url: "http://localhost:"
+                
+                });
+                /*
                 var city = $("#searchbox").val();
                 console.log('this is the text:'+city);
                 var location;
@@ -118,12 +130,12 @@
                 console.log("This is the Weather: "+w);
                 document.getElementById("ninfo").innerHTML = location;
                 document.getElementById("winfo").innerHTML = w;
-                document.getElementById("tinfo").innerHTML = temp;
+                document.getElementById("tinfo").innerHTML = temp;*/
             }
         });
         ReactDOM.render(<SearchStuff />, document.getElementById('searchbuttonholder'));
         
-        describe("SearchStuff", function() {
+/*        describe("SearchStuff", function() {
             var TestUtils = React.addons.TestUtils;
             var component, element;
             beforeEach(function(){
@@ -154,7 +166,7 @@
                 document.getElementById("winfo").innerHTML = w;
                 document.getElementById("tinfo").innerHTML = temp;
             });
-        });
+        });*/
     </script>
     <div id="content"style="position:absolute;top:55%;width:50%;left:25%;right:25%">
         <div id="left">
