@@ -60,11 +60,6 @@
             },
             onClick: function(){
                 var searchboxText= $("#searchbox").val();
-                $.ajax({
-                    
-                    method: "GET",
-                    data: {"location": searchboxText}
-                });
                 ReactDOM.render(<Search />, document.getElementById('searchresultholder'));
             }
         });
@@ -82,8 +77,9 @@
                 )
             },
             componentWillMount: function(){
-                $.get({url: "http://localhost:"
-                
+                $.ajax({url: "http://localhost:3000/resultpage.html",
+                    method: "GET",
+                    data: {"location": searchboxText}
                 });
                 /*
                 var city = $("#searchbox").val();
