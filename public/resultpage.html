@@ -244,6 +244,20 @@
             newObj.getData(data);
             $("#newSpace").text(location+" is currently "+temp);
         }
+        newObj.uploadimg= function(){
+            function handleClick(e) {
+                e.preventDefault();
+                var formData = new FormData($("#newItemForm"));
+                console.log(formData);
+//                $.ajax({
+//                    type: "POST",
+//                    url: "/resultpage.html",
+//                    data: formData,processData: false,
+//                    contentType: false
+//
+//                });
+            }
+        }
         var LoginStuff= React.createClass({
             render: function(){
                 return(
@@ -274,8 +288,13 @@
                 return (
                     <div>
                             <div>
+                                <form id="newItemForm" action="/resultpage.html" method="post" enctype="multipart/form-data">
                                 <label>Enter Username:</label>
                                 <input ref="user" id="registerUsr" type="text" placeholder="Enter username"></input>
+                                <label>Upload an Image:</label>
+                                <input type="file" id="newFile" name="img" />
+                                <input type="submit" value="New" onclick="newObj.uploadimg()" />
+                            </form>
                             </div>
                             <div>
                                 <label>Enter Email:</label>
@@ -284,10 +303,6 @@
                             <div>
                                 <label>Enter Password:</label>
                                 <input ref="pwd" id="registerPwd" type="password" placeholder="Enter password"></input>
-                            </div>
-                            <div>
-                                <label>Upload an Image:</label>
-                                <form id="newItemForm" action="/resultpage.html" method="post" enctype="multipart/form-data"><input type="file" id="newFile" name="img" /></form>
                             </div>
                             <button id="registerBut" onClick={this.onClick}>Register</button>
                     </div>
@@ -298,13 +313,6 @@
                 var email=$("#registerEmail").val();
                 var pwd=$("#registerPwd").val();
                 newObj.signUp(username, email, pwd);
-                var formData = new FormData($("#newItemForm")[0]);
-                $.ajax({
-                    type: "POST",
-                    url: "/resultpage.html",
-                    data: formData,processData: false,
-                    contentType: false
-                });
             }
         });
         var ForgotStuff = React.createClass({
