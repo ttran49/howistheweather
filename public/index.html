@@ -47,18 +47,21 @@
             render: function(){
                 return(
                     <div id="searchbar">
+                        <form action="/resultpage.html/:location" method="get">
                         <div>
                             <span id="searchSpan">
                                 <input ref ="input" type="text" placeholder="Search for location..." required id="searchbox" />
                                 <button id="searchbutton" onClick={this.onClick}> Search!</button>
                             </span>
                         </div>
+                        </form>
                     </div>
                 )
             },
             onClick: function(){
                 var searchboxText= $("#searchbox").val();
-                ReactDOM.render(<Search />, document.getElementById('searchresultholder'));
+                
+                //ReactDOM.render(<Search />, document.getElementById('searchresultholder'));
             }
         });
         var Search = React.createClass({
