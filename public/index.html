@@ -61,10 +61,11 @@
             onClick: function(){
                 var searchboxText= $("#searchbox").val();
                 $.ajax({
+                    
                     method: "GET",
                     data: {"location": searchboxText}
                 });
-                //ReactDOM.render(<Search />, document.getElementById('searchresultholder'));
+                ReactDOM.render(<Search />, document.getElementById('searchresultholder'));
             }
         });
         var Search = React.createClass({
@@ -81,6 +82,10 @@
                 )
             },
             componentWillMount: function(){
+                $.get({url: "http://localhost:"
+                
+                });
+                /*
                 var city = $("#searchbox").val();
                 console.log('this is the text:'+city);
                 var location;
@@ -125,7 +130,7 @@
                 console.log("This is the Weather: "+w);
                 document.getElementById("ninfo").innerHTML = location;
                 document.getElementById("winfo").innerHTML = w;
-                document.getElementById("tinfo").innerHTML = temp;
+                document.getElementById("tinfo").innerHTML = temp;*/
             }
         });
         ReactDOM.render(<SearchStuff />, document.getElementById('searchbuttonholder'));
