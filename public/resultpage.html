@@ -43,6 +43,11 @@
       stroke-width: 1.5px;
     }
     </style>
+    
+    <!-- Firebase Auth -->
+    <script src="https://www.gstatic.com/firebasejs/ui/live/0.5/firebase-ui-auth.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/live/0.5/firebase-ui-auth.css" />
+
 </head>
 <body>
     <! the static bar at the top>
@@ -57,7 +62,11 @@
     <div id="newControl"></div>
     <div id="newSpace"></div>
     <div id="visual"></div>
-    
+    <div id="header">
+    <span id="sign-in-status"></span> | <a href="javascript:firebase.auth().signOut()">Sign Out</a>
+    </div>
+    <div id="firebaseui-auth-container"></div>
+
     
     <p>next <a href="randompage.html" style="color:blue;">page</a>-Chuck</p>
     <div id="choices">
@@ -113,6 +122,61 @@
             messagingSenderId: "1069239150549"
         };
         firebase.initializeApp(config);
+         var userName;
+    firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+            $("#firebaseui-auth-container").hide();
+            // User is signed in.
+            var displayName = user.displayName;
+            var email = user.email;
+            var emailVerified = user.emailVerified;
+            var photoURL = user.photoURL;
+            var uid = user.uid;
+            userName = user.uid;
+            document.getElementById("footer").innerHTML="Welcome to the awesome webapp " +displayName+"!!";
+            //ReactDOM.render(<TodoApp />, document.getElementById('container'));
+
+            var providerData = user.providerData;
+            user.getToken().then(function(accessToken) {
+                document.getElementById('sign-in-status').textContent = "Welcome, " + displayName;
+                document.getElementById('account-details').textContent = JSON.stringify({
+                    displayName: displayName,
+                    email: email,
+                    emailVerified: emailVerified,
+                    photoURL: photoURL,
+                    uid: uid,
+                    accessToken: accessToken,
+                    providerData: providerData
+                }, null, '  ');
+            });
+        } else {
+            console.log("Signed out");
+            // User is signed out.
+            $("#header").hide();
+            document.getElementById("footer").innerHTML="You haven't signed in!";
+            // FirebaseUI config.
+            var uiConfig = {
+                'signInSuccessUrl': '/resultpage.html', //URL that we get sent BACK to after logging in
+                'signInOptions': [
+                    // Leave the lines as is for the providers you want to offer your users.
+            firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+            firebase.auth.EmailAuthProvider.PROVIDER_ID
+                ],
+                // Terms of service url.
+                //'tosUrl': '<your-tos-url>',
+            };
+
+            // Initialize the FirebaseUI Widget using Firebase.
+            var ui = new firebaseui.auth.AuthUI(firebase.auth());
+            // The start method will wait until the DOM is loaded.
+            ui.start('#firebaseui-auth-container', uiConfig);
+            //$("#container").hide();
+        }
+    }, function(error) {
+        console.log(error);
+    });
+
+
         var dataref= firebase.database().ref("Auth");
         var newObj = {};
         newObj.signUp= function(username, email, pwd){
@@ -288,12 +352,12 @@
                 return (
                     <div>
                             <div>
-                                <form id="newItemForm" action="/resultpage.html" method="post" enctype="multipart/form-data">
+                                <form onsubmit ="newObj.uploadimg()" id="newItemForm" action="/resultpage.html" method="post" enctype="multipart/form-data">
                                 <label>Enter Username:</label>
-                                <input ref="user" id="registerUsr" type="text" placeholder="Enter username"></input>
+                                <input ref="user" name="user" id="registerUsr" type="text" placeholder="Enter username"></input>
                                 <label>Upload an Image:</label>
                                 <input type="file" id="newFile" name="img" />
-                                <input type="submit" value="New" onclick="newObj.uploadimg()" />
+                                <input type="submit" value="New" />
                             </form>
                             </div>
                             <div>
