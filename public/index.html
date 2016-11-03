@@ -59,7 +59,6 @@
                 )
             },
             onClick: function(){
-                var searchboxText= $("#searchbox").val();
                 ReactDOM.render(<Search />, document.getElementById('searchresultholder'));
             }
         });
@@ -77,6 +76,7 @@
                 )
             },
             componentWillMount: function(){
+                var searchboxText= $("#searchbox").val();
                 $.ajax({url: "http://localhost:3000/resultpage.html",
                     method: "GET",
                     data: {"location": searchboxText}
